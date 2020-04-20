@@ -12,6 +12,9 @@ Deliverable project part of the subject User Interface Design created by:
 ### [styled-components](https://styled-components.com/)
 - npm install --save styled-components
 
+### [Formik](https://jaredpalmer.com/formik/)
+- npm install formik --save
+
 ## Commands
 
 ### `npm start`
