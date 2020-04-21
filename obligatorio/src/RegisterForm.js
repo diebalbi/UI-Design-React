@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Container, Typography, TextField, Button } from "@material-ui/core";
 import logo from "./logo.svg";
+import { Formik } from "formik";
 
 // TODO replace custom state with Formik
 // TODO use formik for validation
@@ -36,59 +37,84 @@ const RegisterForm = () => {
         Welcome to our platform, please register!
       </Typography>
       <br />
-      <form noValidate autoComplete="off">
-        <FormContainer>
-          <TextField
-            variant="filled"
-            id="fullname"
-            label="Fullname"
-            value={state.fullname}
-            onChange={handleChange("fullname")}
-          />
-          <br />
-          <TextField
-            variant="filled"
-            id="age"
-            label="Age"
-            value={state.age}
-            onChange={handleChange("age")}
-          />
-          <br />
-          <TextField
-            variant="filled"
-            id="email"
-            label="Email"
-            value={state.email}
-            onChange={handleChange("email")}
-          />
-          <br />
-          <TextField
-            variant="filled"
-            id="password"
-            label="Password"
-            type="password"
-            value={state.password}
-            onChange={handleChange("password")}
-          />
-          <br />
-          <TextField
-            variant="filled"
-            id="repeatPassword"
-            label="Repeat pas"
-            type="repeatPassword"
-            value={state.repeatPassword}
-            onChange={handleChange("repeatPassword")}
-          />
-          <br />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => handleSubmit()}
-          >
-            LOGIN
-          </Button>
-        </FormContainer>
-      </form>
+      <Formik
+        initialValues={{ fullname: 'Diego', age: '', email: '', password: '', repeatPassword: ''}}
+        validate = { values => {
+          const errors = {};
+          if(!values.email){
+            errors.email = 'Required';
+          } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+            errors.email = 'Invalid email address';  
+          }
+          return errors;
+        }}
+        onSubmit = {(values, { setSubmitting}) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        {({
+          values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting
+        }) => (
+          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+          <FormContainer>
+            <TextField
+              variant="filled"
+              id="fullname"
+              label="Fullname"
+              value={state.fullname}
+              onChange={handleChange("fullname")}
+            />
+            <br />
+            <TextField
+              variant="filled"
+              id="age"
+              label="Age"
+              value={state.age}
+              onChange={handleChange("age")}
+            />
+            <br />
+            <TextField
+              variant="filled"
+              id="email"
+              label="Email"
+              value={state.email}
+              onChange={handleChange("email")}
+            />
+            {errors.email && touched.email && errors.email}
+            <br />
+            <TextField
+              variant="filled"
+              id="password"
+              label="Password"
+              type="password"
+              value={state.password}
+              onChange={handleChange("password")}
+            />
+            <br />
+            <TextField
+              variant="filled"
+              id="repeatPassword"
+              label="Repeat pas"
+              type="repeatPassword"
+              value={state.repeatPassword}
+              onChange={handleChange("repeatPassword")}
+            />
+            <br />
+            <Button
+              disabled={isSubmitting}
+              variant="contained"
+              color="primary"
+              onClick={() => handleSubmit()}
+            >
+              LOGIN
+            </Button>
+          </FormContainer>
+        </form>
+        )}
+      </Formik>
     </Container>
   );
 };

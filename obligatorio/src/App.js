@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 // import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
