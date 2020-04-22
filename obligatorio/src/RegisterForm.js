@@ -7,29 +7,8 @@ import { Formik } from "formik";
 // TODO replace custom state with Formik
 // TODO use formik for validation
 // TODO use validation with material-ui to show HelperText
-const useForm = () => {
-  const [state, setState] = React.useState({});
-  const handleChange = (key) => (evt) => {
-    setState({
-      ...state,
-      [key]: evt.target.value,
-    });
-  };
-
-  const handleSubmit = async () => {
-    // const user = await client.login({email, password});
-    console.log("REGISTER USER", state);
-  };
-
-  return {
-    state,
-    handleChange,
-    handleSubmit,
-  };
-};
 
 const RegisterForm = () => {
-  const { state, handleChange, handleSubmit } = useForm();
   return (
     <Container maxWidth="sm">
       <Logo src={logo} />
@@ -64,7 +43,7 @@ const RegisterForm = () => {
               variant="filled"
               id="fullname"
               label="Fullname"
-              value={state.fullname}
+              value={values.fullname}
               onChange={handleChange("fullname")}
             />
             <br />
@@ -72,34 +51,36 @@ const RegisterForm = () => {
               variant="filled"
               id="age"
               label="Age"
-              value={state.age}
+              value={values.age}
               onChange={handleChange("age")}
             />
             <br />
             <TextField
+              required
+              error={errors.email && touched.email && errors.email}
+              helperText={errors.email && touched.email && errors.email ? errors.email : ' '}
               variant="filled"
               id="email"
               label="Email"
-              value={state.email}
+              value={values.email}
               onChange={handleChange("email")}
             />
-            {errors.email && touched.email && errors.email}
             <br />
             <TextField
               variant="filled"
               id="password"
               label="Password"
               type="password"
-              value={state.password}
+              value={values.password}
               onChange={handleChange("password")}
             />
             <br />
             <TextField
               variant="filled"
               id="repeatPassword"
-              label="Repeat pas"
+              label="Repeat password"
               type="repeatPassword"
-              value={state.repeatPassword}
+              value={values.repeatPassword}
               onChange={handleChange("repeatPassword")}
             />
             <br />
@@ -107,7 +88,7 @@ const RegisterForm = () => {
               disabled={isSubmitting}
               variant="contained"
               color="primary"
-              onClick={() => handleSubmit()}
+              type="submit"
             >
               LOGIN
             </Button>
