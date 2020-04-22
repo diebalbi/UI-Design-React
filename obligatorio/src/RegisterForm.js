@@ -5,10 +5,6 @@ import logo from "./logo.svg";
 import { Formik } from "formik";
 import * as Yup from 'yup';
 
-// TODO replace custom state with Formik
-// TODO use formik for validation
-// TODO use validation with material-ui to show HelperText
-
 const validations = Yup.object().shape({
   fullname: Yup.string()
     .min(2, 'Too short')
@@ -102,7 +98,7 @@ const RegisterForm = () => {
               color="primary"
               type="submit"
             >
-              LOGIN
+              REGISTER
             </Button>
           </FormContainer>
         </form>

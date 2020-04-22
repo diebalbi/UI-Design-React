@@ -15,6 +15,9 @@ Deliverable project part of the subject User Interface Design created by:
 ### [Formik](https://jaredpalmer.com/formik/)
 - npm install formik --save
 
+### [Yup](https://www.npmjs.com/package/yup)
+- npm install -S yup
+
 ## Commands
 
 ### `npm start`

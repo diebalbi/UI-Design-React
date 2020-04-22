@@ -2,15 +2,18 @@ import * as React from "react";
 import styled from "styled-components";
 import { Container, Typography, TextField, Button } from "@material-ui/core";
 import logo from "./logo.svg";
+import { Formik } from "formik";
+import * as Yup from 'yup';
+
+const validations = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Required'),
+  password: Yup.string()
+    .required('Password is required')
+})
 
 const LoginForm = () => {
-  const [password, setPassword] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const handleSubmit = async () => {
-    // const user = await client.login({email, password});
-    console.log("LOGIN USER", { email, password });
-  };
-
   return (
     <Container maxWidth="sm">
       <Logo src={logo} />
@@ -18,34 +21,52 @@ const LoginForm = () => {
         Welcome to our platform, please login!
       </Typography>
       <br />
-      <form noValidate autoComplete="off">
-        <FormContainer>
-          <TextField
-            variant="filled"
-            id="email"
-            label="Email"
-            value={email}
-            onChange={(evt) => setEmail(evt.target.value)}
-          />
-          <br />
-          <TextField
-            variant="filled"
-            id="password"
-            label="Password"
-            type="password"
-            value={password}
-            onChange={(evt) => setPassword(evt.target.value)}
-          />
-          <br />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => handleSubmit()}
-          >
-            LOGIN
-          </Button>
-        </FormContainer>
-      </form>
+      <Formik
+        initialValues={{ email: '', password: ''}}
+          validationSchema={validations}
+          onSubmit = {(values, { setSubmitting}) => {
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2));
+              setSubmitting(false);
+            }, 400);
+          }}
+        >
+          {({
+            values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting
+          }) => (
+            <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+              <FormContainer>
+                <TextField
+                  error={errors.email && touched.email}
+                  helperText={errors.email && touched.email ? errors.email : ' '}
+                  variant="filled"
+                  id="email"
+                  label="Email"
+                  value={values.email}
+                  onChange={handleChange("email")}
+                />
+                <br />
+                <TextField
+                  variant="filled"
+                  id="password"
+                  label="Password"
+                  type="password"
+                  value={values.password}
+                  onChange={handleChange("password")}
+                />
+                <br />
+                <Button
+                  disabled={isSubmitting}
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  LOGIN
+                </Button>
+              </FormContainer>
+            </form>
+        )}
+      </Formik>
     </Container>
   );
 };
