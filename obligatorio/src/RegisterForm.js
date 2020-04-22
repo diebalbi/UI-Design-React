@@ -20,10 +20,11 @@ const RegisterForm = () => {
         initialValues={{ fullname: 'Diego', age: '', email: '', password: '', repeatPassword: ''}}
         validate = { values => {
           const errors = {};
-          if(!values.email){
-            errors.email = 'Required';
-          } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-            errors.email = 'Invalid email address';  
+          if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+            errors.email = 'Dirección invalida de email';  
+          }
+          if(values.password !== values.repeatPassword){
+            errors.repeatPassword = 'No coincide con la contraseña';
           }
           return errors;
         }}
@@ -56,9 +57,8 @@ const RegisterForm = () => {
             />
             <br />
             <TextField
-              required
-              error={errors.email && touched.email && errors.email}
-              helperText={errors.email && touched.email && errors.email ? errors.email : ' '}
+              error={errors.email && touched.email}
+              helperText={errors.email && touched.email ? errors.email : ' '}
               variant="filled"
               id="email"
               label="Email"
@@ -76,6 +76,8 @@ const RegisterForm = () => {
             />
             <br />
             <TextField
+              error={errors.repeatPassword && touched.repeatPassword}
+              helperText={errors.repeatPassword && touched.repeatPassword ? errors.repeatPassword : ' '}
               variant="filled"
               id="repeatPassword"
               label="Repeat password"
