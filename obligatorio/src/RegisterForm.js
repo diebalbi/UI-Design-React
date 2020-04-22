@@ -3,10 +3,24 @@ import styled from "styled-components";
 import { Container, Typography, TextField, Button } from "@material-ui/core";
 import logo from "./logo.svg";
 import { Formik } from "formik";
+import * as Yup from 'yup';
 
 // TODO replace custom state with Formik
 // TODO use formik for validation
 // TODO use validation with material-ui to show HelperText
+
+const validations = Yup.object().shape({
+  fullname: Yup.string()
+    .min(2, 'Too short')
+    .max(50, 'Too long')
+    .required('Required'),
+  age: Yup.number()
+    .positive('Invalid age number')
+    .required('Required'),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Required')
+})
 
 const RegisterForm = () => {
   return (
@@ -17,17 +31,8 @@ const RegisterForm = () => {
       </Typography>
       <br />
       <Formik
-        initialValues={{ fullname: 'Diego', age: '', email: '', password: '', repeatPassword: ''}}
-        validate = { values => {
-          const errors = {};
-          if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-            errors.email = 'Dirección invalida de email';  
-          }
-          if(values.password !== values.repeatPassword){
-            errors.repeatPassword = 'No coincide con la contraseña';
-          }
-          return errors;
-        }}
+        initialValues={{ fullname: '', age: '', email: '', password: '', repeatPassword: ''}}
+        validationSchema={validations}
         onSubmit = {(values, { setSubmitting}) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
@@ -41,6 +46,8 @@ const RegisterForm = () => {
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
           <FormContainer>
             <TextField
+              error={errors.fullname && touched.fullname}
+              helperText={errors.fullname && touched.fullname ? errors.fullname : ' '}
               variant="filled"
               id="fullname"
               label="Fullname"
@@ -49,9 +56,12 @@ const RegisterForm = () => {
             />
             <br />
             <TextField
+              error={errors.age && touched.age}
+              helperText={errors.age && touched.age ? errors.age : ' '}
               variant="filled"
               id="age"
               label="Age"
+              type="number"
               value={values.age}
               onChange={handleChange("age")}
             />
