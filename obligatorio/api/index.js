@@ -9,7 +9,7 @@ const typeDefs = gql`
     type User {
         id: String
         fullname: String!
-        age: String!
+        age: Int!
         email: String!
     }
 
@@ -19,7 +19,7 @@ const typeDefs = gql`
 
     input RegisterInput {
         fullname: String!
-        age: String!
+        age: Int!
         email: String!
         password: String!
     }
@@ -29,7 +29,7 @@ const users = [
     {
         id: "1234",
         fullname: "Prueba",
-        age: "25",
+        age: 25,
         email: "prueba@prueba.com"
     },
 ];

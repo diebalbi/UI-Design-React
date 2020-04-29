@@ -93,6 +93,7 @@ const RegisterForm = () => {
               variant="filled"
               id="age"
               label="Age"
+              type="number"
               value={values.age}
               onChange={handleChange("age")}
             />
@@ -108,6 +109,8 @@ const RegisterForm = () => {
             />
             <br />
             <TextField
+              error={errors.password && touched.password}
+              helperText={errors.password && touched.password ? errors.password : ' '}
               variant="filled"
               id="password"
               label="Password"
