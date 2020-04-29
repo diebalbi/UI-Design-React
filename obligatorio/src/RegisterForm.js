@@ -1,9 +1,33 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Container, Typography, TextField, Button } from "@material-ui/core";
 import logo from "./logo.svg";
+import { Container, Typography, TextField, Button } from "@material-ui/core";
 import { Formik } from "formik";
 import * as Yup from 'yup';
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+
+const REGISTER_MUTATION = gql`
+  mutation register($input: RegisterInput!) {
+    register(input: $input) {
+      id
+      fullname
+      age
+      email
+    }
+  }
+`;
+
+const USERS_QUERY = gql`
+  query Users {
+    users {
+      id
+      fullname
+      age
+      email
+    }
+  }
+`
 
 const validations = Yup.object().shape({
   fullname: Yup.string()
@@ -19,6 +43,9 @@ const validations = Yup.object().shape({
 })
 
 const RegisterForm = () => {
+  const [register] = useMutation(REGISTER_MUTATION);
+  const { data, loading, error } = useQuery(USERS_QUERY);
+
   return (
     <Container maxWidth="sm">
       <Logo src={logo} />
@@ -29,9 +56,18 @@ const RegisterForm = () => {
       <Formik
         initialValues={{ fullname: '', age: '', email: '', password: '', repeatPassword: ''}}
         validationSchema={validations}
-        onSubmit = {(values, { setSubmitting}) => {
+        onSubmit = {( {repeatPassword, ...values}, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
+            
+            register({
+              variables: {
+                input: values
+              },
+            }).then((result) => {
+              console.log("Result", { result });
+            });
+
             setSubmitting(false);
           }, 400);
         }}
@@ -73,6 +109,8 @@ const RegisterForm = () => {
             />
             <br />
             <TextField
+              error={errors.password && touched.password}
+              helperText={errors.password && touched.password ? errors.password : ' '}
               variant="filled"
               id="password"
               label="Password"
@@ -101,6 +139,7 @@ const RegisterForm = () => {
               REGISTER
             </Button>
           </FormContainer>
+          {JSON.stringify(data)}
         </form>
         )}
       </Formik>
