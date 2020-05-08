@@ -29,7 +29,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Builds the app for production to the `build` folder.<br />
 
- ## Project Idea
+ ## Project Idea + Prototype
+ 
+[Prototype link](figma.com/file/PFDGyPfof3jsY7bt6dvu2h/Desarrollo-UI?node-id=0%3A1)
  
 ### MENU GLOBAL: 
 - icono a la izquierda
