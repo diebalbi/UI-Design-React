@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Container, Typography, TextField, Button } from "@material-ui/core";
-import logo from "./logo.svg";
+import logo from "../assets/logo.png";
 import { Formik } from "formik";
 import * as Yup from 'yup';
 
