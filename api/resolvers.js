@@ -49,7 +49,7 @@ const Image = mongoose.model("Image", {
 const resolvers = {
     Query: {
         user: (_, args) => {
-            return User.find({ email: args.email, password: args.password});
+            return User.findOne({ email: args.email, password: args.password});
         },
         places: (_, args) => {
             return Place.find({ continentId: args.continentId });
