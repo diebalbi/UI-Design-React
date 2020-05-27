@@ -12,7 +12,6 @@ const REGISTER_MUTATION = gql`
     register(input: $input) {
       id
       fullname
-      age
       email
     }
   }
@@ -23,7 +22,6 @@ const USERS_QUERY = gql`
     users {
       id
       fullname
-      age
       email
     }
   }
@@ -33,9 +31,6 @@ const validations = Yup.object().shape({
   fullname: Yup.string()
     .min(2, 'Too short')
     .max(50, 'Too long')
-    .required('Required'),
-  age: Yup.number()
-    .positive('Invalid age number')
     .required('Required'),
   email: Yup.string()
     .email('Invalid email address')
@@ -54,7 +49,7 @@ const RegisterForm = () => {
       </Typography>
       <br />
       <Formik
-        initialValues={{ fullname: '', age: '', email: '', password: '', repeatPassword: ''}}
+        initialValues={{ fullname: '', email: '', password: '', repeatPassword: ''}}
         validationSchema={validations}
         onSubmit = {( {repeatPassword, ...values}, { setSubmitting }) => {
           setTimeout(() => {
@@ -85,17 +80,6 @@ const RegisterForm = () => {
               label="Fullname"
               value={values.fullname}
               onChange={handleChange("fullname")}
-            />
-            <br />
-            <TextField
-              error={errors.age && touched.age}
-              helperText={errors.age && touched.age ? errors.age : ' '}
-              variant="filled"
-              id="age"
-              label="Age"
-              type="number"
-              value={values.age}
-              onChange={handleChange("age")}
             />
             <br />
             <TextField
