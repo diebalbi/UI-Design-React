@@ -8,8 +8,6 @@ export default function Home() {
     return (
         <Container maxWidth="md">
             <Continent />
-            <Continent />
-            <Region />
             <Region />
         </Container>
     );

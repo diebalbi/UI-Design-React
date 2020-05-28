@@ -43,7 +43,7 @@ export default function Home() {
         <Container maxWidth="md">
             <br />
             <Typography variant="h4">
-                America del Fufu
+                Europa
             </Typography>
             <br />
             <Gallery photos={PHOTO_SET} />
