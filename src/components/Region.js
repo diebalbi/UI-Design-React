@@ -7,8 +7,7 @@ const PHOTO_SET = [
     {
         src: 'http://example.com/example/img1.jpg',
         width: 1,
-        height: 1,
-        id = 1
+        height: 1
     },
     {
         src: 'http://example.com/example/img2.jpg',
