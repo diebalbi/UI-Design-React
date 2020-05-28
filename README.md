@@ -17,10 +17,10 @@ Por otro lado si existen los distintos componentes pero utilizando texto "lorem 
 ## Instrucciones nuevo ambiente
 
 - Clonar el repositorio 
-- Correr comando `npm install`
-- Correr comando `npm start`
+- Correr comando `yarn install`
+- Correr comando `yarn start`
 
-### Para deployment en Now
+### Para deployment en Versel
 
 - Modificar web/apollo.js e indicar la nueva URL
 
@@ -43,6 +43,100 @@ Por otro lado si existen los distintos componentes pero utilizando texto "lorem 
 
 ### [GraphQL](https://graphql.org/)
 - npm install --save graphql
+
+## Schema Graphql
+    Queries:
+        -user(email: String!, password: String!): User
+        -users: [User]
+        -continents: [Continent]
+        -regions: [Region]
+        -region(id: ID!): Region
+	-place(id: ID!): Place
+        -places(continentId: ID!): [Place]
+        -activities(placeId: ID!): [Activity]
+        -images(placeId: ID!): [Image]
+        -reviewes(placeId: ID!): [Review]
+
+    Types:
+    	User
+		id: ID
+		fullname: String!
+		email: String!
+		password: String!
+
+    	Continent
+        	id: ID
+       		name: String!
+	Region
+        	id: ID
+        	name: String!
+
+	Place
+        	id: ID
+        	name: String!
+        	description: String!
+        	continentId: ID!
+        	regionId: ID
+    	Activity
+		id: ID
+		placeId: String!
+		name: String!
+		price: Int!
+
+    	Image
+		id: ID
+		placeId: String!
+		url: String!
+
+    	Review
+		id: ID
+		userId: ID!
+		placeId: ID!
+		rating: Int!
+		description: String!
+    
+    Mutations:
+        register(input: RegisterInput!): User!
+        registerContinent(input: RegisterContinent!): Continent!
+        registerRegion(input: RegisterRegion!): Region!
+        registerPlace(input: RegisterPlace!): Place!
+        registerActivity(input: RegisterActivity!): Activity!
+        registerImage(input: RegisterImage!): Image!
+        registerReview(input: RegisterReview!): Review!
+
+    Inputs for Mutations:
+    
+    	RegisterInput
+		fullname: String!
+		email: String!
+		password: String!
+
+    	RegisterContinent
+        	name: String!
+    	
+	RegisterRegion
+        	name: String!
+	
+	RegisterPlace
+		name: String!
+		description: String!
+		continentId: ID!
+		regionId: ID
+
+    	RegisterActivity 
+		name: String!
+		price: Int!
+		placeId: ID!
+
+    	RegisterImage
+		url: String!
+		placeId: ID!
+
+    	RegisterReview
+		userId: ID!
+		placeId: ID!
+		rating: Int!
+		description: String!
 
 ## Project Idea + Prototype
 [Prototype link](figma.com/file/PFDGyPfof3jsY7bt6dvu2h/Desarrollo-UI?node-id=0%3A1)
