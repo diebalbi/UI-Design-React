@@ -1,8 +1,28 @@
-## About
+## Costas que Faltan:
 
-Deliverable project part of the subject User Interface Design created by:
-- Pablo Pereira [@invict1](https://github.com/invict1)
-- Diego Balbi [@diebalbi](https://github.com/diebalbi)
+1) No pudimos arreglar Routing y por ende no podemos entrar al detalle de una ciudad en específico.
+Por otro lado si existen los distintos componentes pero utilizando texto "lorem ipsum".
+
+2) La WebApi quedó lista, todos los endpoints estan prontos pero no llegamos a consumir los recursos.
+
+## Jerarquía de componentes
+- Header
+  - Login
+  - Register
+- Main
+  - HomePage
+  - Detail
+- Footer
+
+## Instrucciones nuevo ambiente
+
+- Clonar el repositorio 
+- Correr comando `npm install`
+- Correr comando `npm start`
+
+### Para deployment en Now
+
+- Modificar web/apollo.js e indicar la nueva URL
 
 ## Dependencies
 
@@ -18,49 +38,35 @@ Deliverable project part of the subject User Interface Design created by:
 ### [Yup](https://www.npmjs.com/package/yup)
 - npm install -S yup
 
-## Commands
+### [Mongoose](https://mongoosejs.com)
+- npm install mongoose
 
-### `npm start`
+### [GraphQL](https://graphql.org/)
+- npm install --save graphql
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-
- ## Project Idea + Prototype
- 
+## Project Idea + Prototype
 [Prototype link](figma.com/file/PFDGyPfof3jsY7bt6dvu2h/Desarrollo-UI?node-id=0%3A1)
  
 ### MENU GLOBAL: 
 - icono a la izquierda
 - barra de busqueda
-- boton de page favourites
 - boton de page register
 - boton de page login
 
 ### Home
-- filtro (continente (default) , region)
-- imagen + nombre + actividades
-- ver todos 
-	- muestra todos segun el filtro para la seleccion
+- orden, primero 
+- imagen + nombre + cantidad actividades
 	
-### Login
-### Register
+### Login (Modal)
 
-### Local Detail (Add Favourite, Share button)
+### Register (Modal)
+
+### Local Detail
 - nombre + valoracion media
 - descripcion
 - imagenes
-	- fotos segun periodo del dia (dia, noche)
 - actividades disponibles
-	- filtro segun categoria
 - reseñas de visitantes
-	- nombre, fecham, estrellas en la reseña,
-	- poder ordenar las reseñas por la valoracion
+	- nombre, estrellas en la reseña
 - agregar reseña
 	- debe estar logueado
-	
-### Favourites
-- misma estructura de Home
