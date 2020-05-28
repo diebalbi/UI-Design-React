@@ -7,7 +7,7 @@ Por otro lado si existen los distintos componentes pero utilizando texto "lorem 
 
 ## URL
 
-ui-design-react-823qjzp9m.now.sh
+https://ui-design-react-823qjzp9m.now.sh
 
 ## Principales decisiones de diseño
 
