@@ -62,7 +62,7 @@ También lo que notamos en estas paginas de viajes, es que todas usan imagenes g
 ### [GraphQL](https://graphql.org/)
 - npm install --save graphql
 
-## Project Idea + Prototype
+## Prototype
 [Prototype link](figma.com/file/PFDGyPfof3jsY7bt6dvu2h/Desarrollo-UI?node-id=0%3A1)
  
 ### MENU GLOBAL: 
