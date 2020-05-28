@@ -32,7 +32,7 @@ const LoginForm = () => {
           }}
         >
           {({
-            values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting
+            values, errors, touched, handleChange, handleSubmit, isSubmitting
           }) => (
             <form noValidate autoComplete="off" onSubmit={handleSubmit}>
               <FormContainer>

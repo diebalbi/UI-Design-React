@@ -4,7 +4,7 @@ import logo from "../assets/logo.png";
 import { Container, Typography, TextField, Button } from "@material-ui/core";
 import { Formik } from "formik";
 import * as Yup from 'yup';
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
 const REGISTER_MUTATION = gql`
@@ -16,16 +16,6 @@ const REGISTER_MUTATION = gql`
     }
   }
 `;
-
-const USERS_QUERY = gql`
-  query Users {
-    users {
-      id
-      fullname
-      email
-    }
-  }
-`
 
 const validations = Yup.object().shape({
   fullname: Yup.string()
@@ -39,7 +29,6 @@ const validations = Yup.object().shape({
 
 const RegisterForm = () => {
   const [register] = useMutation(REGISTER_MUTATION);
-  const { data, loading, error } = useQuery(USERS_QUERY);
 
   return (
     <Container maxWidth="sm">
@@ -68,7 +57,7 @@ const RegisterForm = () => {
         }}
       >
         {({
-          values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting
+          values, errors, touched, handleChange, handleSubmit, isSubmitting
         }) => (
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
           <FormContainer>
@@ -123,7 +112,6 @@ const RegisterForm = () => {
               REGISTER
             </Button>
           </FormContainer>
-          {JSON.stringify(data)}
         </form>
         )}
       </Formik>
