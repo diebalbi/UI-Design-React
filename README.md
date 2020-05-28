@@ -5,6 +5,16 @@ Por otro lado si existen los distintos componentes pero utilizando texto "lorem 
 
 2) La WebApi quedó lista, todos los endpoints estan prontos pero no llegamos a consumir los recursos.
 
+## URL
+
+ui-design-react-823qjzp9m.now.sh
+
+## Principales decisiones de diseño
+
+Nos basamos en los estilos limpios y sencillos que encontramos en paginas del estilo como Airbnb, Booking y Qatar Airways pero también en otras paginas que nos resultaron agradables a la vista como mongodb y react, donde no utilizan muchos colores, sino que tienen generalmente 1 color principal y luego juegan con tonos de grises y el color blanco.
+
+También lo que notamos en estas paginas de viajes, es que todas usan imagenes grandes o medianamente grades con poco texto, y toda la información te la brindan al ingresar en cada una de ellas por lo cual seguimos esa idea para el diseño de nuestro proyecto.
+
 ## Jerarquía de componentes
 
 - Header
