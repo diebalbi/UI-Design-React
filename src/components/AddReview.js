@@ -4,7 +4,7 @@ import { Container, Typography, TextField, Button } from "@material-ui/core";
 import { Formik } from "formik";
 import Rating from '@material-ui/lab/Rating';
 
-const LoginForm = () => {
+const AddReview = () => {
     return (
         <Formik
             initialValues={{ email: '', password: '' }}
@@ -55,4 +55,4 @@ const FormContainer = styled.div`
   flex-direction: column;
 `;
 
-export default LoginForm;
+export default AddReview;

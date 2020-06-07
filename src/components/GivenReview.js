@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Review = (name, rating, description) => {
+const Review = ({name, rating, description}) => {
     const classes = useStyles();
 
     return (
@@ -25,7 +25,7 @@ const Review = (name, rating, description) => {
                 <Rating name="size-small" defaultValue={rating} size="small" />
             </div>
             <Typography variant="h8">
-                {comment}
+                {description}
                 <br />
             </Typography>
             <br />

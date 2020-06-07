@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     },
 });
 
-const Activities = (activities) => {
+const Activities = ({activities}) => {
     const classes = useStyles();
 
     return (
