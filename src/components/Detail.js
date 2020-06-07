@@ -8,6 +8,20 @@ import { makeStyles } from '@material-ui/core/styles';
 import AddReview from "./AddReview";
 import GivenReview from "./GivenReview";
 import Activities from "./Activities";
+import { gql } from "apollo-boost";
+import { useQuery } from '@apollo/react-hooks';
+
+const GET_PLACE = gql`
+    query GetPlace($placeId: ID!) {
+        place(id: $placeId) {
+            id,
+            name,
+            description,
+            continentId,
+            regionId
+        }
+    }
+`;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,8 +33,69 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Detail = ({ match }) => {
+const Detail = ({ placeId }) => {
     const classes = useStyles();
+    const { loading, error, data } = useQuery(GET_PLACE, { variables: { placeId } });
+
+    if (loading) return 'Loading...';
+    if (error) return `Error! ${error.message}`;
+
+    return (
+        <div>
+            <Container maxWidth="md">
+                <Typography variant="h4">
+                    {data.place.name}
+                </Typography>
+                <div className={classes.root}>
+                    <Rating name="size-small" defaultValue={2} size="small" />
+                </div>
+                
+                <Carousel>
+                    <div>
+                        <img src="../assets/1.jpg" />
+                        <p className="legend">Legend 1</p>
+                    </div>
+                    <div>
+                        <img src="../assets/2.jpg" />
+                        <p className="legend">Legend 2</p>
+                    </div>
+                    <div>
+                        <img src="../assets/3.jpg" />
+                        <p className="legend">Legend 3</p>
+                    </div>
+                </Carousel>
+
+                <Divider />
+                <br />
+                <Typography variant="h5">
+                    Description
+                </Typography>
+                <br />
+                <Typography variant="h7">
+                    {data.place.description}
+                </Typography>
+                <br />
+                <br />
+                <Divider />
+                <br />
+
+                <Activities />
+
+                <Typography variant="h5">
+                    Comments
+            </Typography>
+                <br />
+                <GivenReview />
+                <GivenReview />
+
+                <br />
+                <Divider />
+                <br />
+                <AddReview />
+                <br />
+            </Container>
+        </div>
+    );
 
     return (
         <Container maxWidth="md">
@@ -76,3 +151,5 @@ const Detail = ({ match }) => {
         </Container>
     );
 }
+
+export default Detail;

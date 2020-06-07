@@ -51,7 +51,10 @@ const resolvers = {
         user: (_, args) => {
             return User.findOne({ email: args.email, password: args.password});
         },
-        places: (_, args) => {
+        placesByContinent: (_, args) => {
+            return Place.find({ continentId: args.continentId });
+        },
+        placesByRegion: (_, args) => {
             return Place.find({ continentId: args.continentId });
         },
         place: (_, args) => {
@@ -62,6 +65,9 @@ const resolvers = {
         },
         images: (_, args) => {
             return Image.find({ placeId: args.placeId });
+        },
+        image: (_, args) => {
+            return Image.findOne({ placeId: args.placeId });
         },
         region: (_, args, context, info) => {
             return Region.findById(args.id);

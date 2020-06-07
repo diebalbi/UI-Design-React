@@ -10,9 +10,11 @@ const typeDefs = gql`
         region(id: ID!): Region
 
         place(id: ID!): Place
-        places(continentId: ID!): [Place]
+        placesByContinent(continentId: ID!): [Place]
+        placesByRegion(regionId: ID!): [Place]
         activities(placeId: ID!): [Activity]
         images(placeId: ID!): [Image]
+        image(placeId: ID!): Image
         reviewes(placeId: ID!): [Review]
     }
 
