@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, TextField, Button } from "@material-ui/core";
+import { Container, Typography } from "@material-ui/core";
 import Rating from '@material-ui/lab/Rating';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
@@ -19,14 +19,14 @@ const GET_PLACE = gql`
             description,
             continentId,
             regionId,
-            
-            // rating,
-            // images {url},
-            // activities {name, price}
-            // reviews {name, rating, description}
         }
     }
 `;
+
+// rating,
+// images {url},
+// activities {name, price}
+// reviews {name, rating, description}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,7 +48,7 @@ const Detail = ({ placeId }) => {
     return (
         <div>
             <Container maxWidth="md">
-                <Typography variant="h4">
+                {/* <Typography variant="h4">
                     {data.place.name}
                 </Typography>
 
@@ -94,7 +94,7 @@ const Detail = ({ placeId }) => {
                 <Divider />
                 <br />
                 <AddReview />
-                <br />
+                <br /> */}
             </Container>
         </div>
     );

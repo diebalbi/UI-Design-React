@@ -15,9 +15,9 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Header />
-        <Detail placeId={"5ecee28b15476c4fe8ff3ac9"}/>
+        {/* <Detail placeId={"5ecee28b15476c4fe8ff3ac9"}/>
         <ContinentsSection />
-        <RegionsSection />
+        <RegionsSection /> */}
         <Footer />
       </Router>
     </ApolloProvider>

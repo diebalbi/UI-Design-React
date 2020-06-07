@@ -24,7 +24,16 @@ const validations = Yup.object().shape({
     .required('Required'),
   email: Yup.string()
     .email('Invalid email address')
-    .required('Required')
+    .required('Required'),
+  password: Yup.string()
+    .required('Required'),
+  repeatPassword: Yup.string()
+    .test(
+      'Match',
+      "Passwords don't match",
+      function(repeatPassword){
+        return repeatPassword === this.parent.password;
+      })
 })
 
 const RegisterForm = () => {

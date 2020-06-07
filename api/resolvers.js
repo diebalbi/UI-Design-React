@@ -49,9 +49,6 @@ const Image = mongoose.model("Image", {
     
 const resolvers = {
     Query: {
-        user: (_, args) => {
-            return User.findOne({ email: args.email, password: args.password});
-        },
         placesByContinent: (_, args) => {
             return Place.find({ continentId: args.continentId });
         },
@@ -81,6 +78,12 @@ const resolvers = {
         regions: () => Region.find()
     },
     Mutation: {
+        login: (_, { input }) => { 
+            return User.findOne({
+                email: input.email, 
+                password: input.password
+            });
+        },
         register: (_, { input }) => {
             const user = new User(input);
             return user.save();
