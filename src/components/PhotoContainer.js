@@ -10,9 +10,9 @@ const PhotoContainer = (photos) => {
     };
 
     return (
-        <>
-            <section>{displayPhotos()}</section>
-        </>
+        <section>
+            {displayPhotos()}
+        </section>
     );
 };
 

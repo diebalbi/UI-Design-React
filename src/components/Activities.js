@@ -16,20 +16,10 @@ const useStyles = makeStyles({
     },
 });
 
-function createData(name, price) {
-    return { name, price };
-}
-
-const rows = [
-    createData('Actividad 1', 159),
-    createData('Actividad 2', 237),
-];
-
-export default function SimpleTable() {
+const Activities = (activities) => {
     const classes = useStyles();
 
     return (
-
         <Container maxWidth="md">
             <Typography variant="h5">
                 Activities
@@ -44,21 +34,22 @@ export default function SimpleTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.name}>
+                        {activities.map((activity) => (
+                            <TableRow key={activity.name}>
                                 <TableCell component="th" scope="row">
-                                    {row.name}
+                                    {activity.name}
                                 </TableCell>
-                                <TableCell align="right">{row.price}</TableCell>
+                                <TableCell align="right">{activity.price}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-
             <br />
             <Divider />
             <br />
         </Container>
     );
 }
+
+export default Activities;

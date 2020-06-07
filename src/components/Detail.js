@@ -18,7 +18,12 @@ const GET_PLACE = gql`
             name,
             description,
             continentId,
-            regionId
+            regionId,
+            
+            // rating,
+            // images {url},
+            // activities {name, price}
+            // reviews {name, rating, description}
         }
     }
 `;
@@ -46,26 +51,20 @@ const Detail = ({ placeId }) => {
                 <Typography variant="h4">
                     {data.place.name}
                 </Typography>
-                <div className={classes.root}>
-                    <Rating name="size-small" defaultValue={2} size="small" />
-                </div>
-                
-                <Carousel>
-                    <div>
-                        <img src="../assets/1.jpg" />
-                        <p className="legend">Legend 1</p>
-                    </div>
-                    <div>
-                        <img src="../assets/2.jpg" />
-                        <p className="legend">Legend 2</p>
-                    </div>
-                    <div>
-                        <img src="../assets/3.jpg" />
-                        <p className="legend">Legend 3</p>
-                    </div>
-                </Carousel>
 
+                <div className={classes.root}>
+                    <Rating name="size-small" defaultValue={data.place.rating} size="small" />
+                </div>
+
+                <Carousel>
+                    {data.place.images.map(({ url }) => (
+                        <div>
+                        <img src={url} />
+                    </div>
+                    ))}
+                </Carousel>
                 <Divider />
+
                 <br />
                 <Typography variant="h5">
                     Description
@@ -77,17 +76,20 @@ const Detail = ({ placeId }) => {
                 <br />
                 <br />
                 <Divider />
-                <br />
 
-                <Activities />
+                <br />
+                <Activities activities={data.place.activities} />
 
                 <Typography variant="h5">
                     Comments
-            </Typography>
+                </Typography>
                 <br />
-                <GivenReview />
-                <GivenReview />
 
+                {data.place.reviews.map(({ name, rating, description }) => (
+                    <div>
+                        <GivenReview name={name} rating={rating} description={description} />
+                    </div>
+                ))}
                 <br />
                 <Divider />
                 <br />
@@ -96,60 +98,5 @@ const Detail = ({ placeId }) => {
             </Container>
         </div>
     );
-
-    return (
-        <Container maxWidth="md">
-            <Typography variant="h4">
-                London
-            </Typography>
-            <div className={classes.root}>
-                <Rating name="size-small" defaultValue={2} size="small" />
-            </div>
-            <Carousel>
-                <div>
-                    <img src="../assets/1.jpg" />
-                    <p className="legend">Legend 1</p>
-                </div>
-                <div>
-                    <img src="../assets/2.jpg" />
-                    <p className="legend">Legend 2</p>
-                </div>
-                <div>
-                    <img src="../assets/3.jpg" />
-                    <p className="legend">Legend 3</p>
-                </div>
-            </Carousel>
-
-            <Divider />
-            <br />
-            <Typography variant="h5">
-                Description
-            </Typography>
-            <br />
-            <Typography variant="h7">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Typography>
-            <br />
-            <br />
-            <Divider />
-            <br />
-
-            <Activities />
-
-            <Typography variant="h5">
-                Comments
-            </Typography>
-            <br />
-            <GivenReview />
-            <GivenReview />
-
-            <br />
-            <Divider />
-            <br />
-            <AddReview />
-            <br />
-        </Container>
-    );
 }
-
 export default Detail;

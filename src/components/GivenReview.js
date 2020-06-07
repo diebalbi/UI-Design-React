@@ -13,22 +13,24 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Detail() {
+const Review = (name, rating, description) => {
     const classes = useStyles();
 
     return (
         <Container maxWidth="md">
             <Typography variant="h7">
-                Diego Fufu
+                {name}
             </Typography>
             <div className={classes.root}>
-                <Rating name="size-small" defaultValue={2} size="small" />
+                <Rating name="size-small" defaultValue={rating} size="small" />
             </div>
             <Typography variant="h8">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                {comment}
                 <br />
             </Typography>
             <br />
         </Container>
     );
 }
+
+export default Review;
