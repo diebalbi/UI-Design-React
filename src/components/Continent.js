@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, TextField, Button } from "@material-ui/core";
+import { Container, Typography } from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import { gql } from "apollo-boost";
 import { useQuery } from '@apollo/react-hooks';
@@ -38,7 +38,7 @@ const Continent = ({ continentId, name }) => {
                 </Typography>
                 <br />
                 {data.placesByContinent.map(({ id, name }) => (
-                    <PhotoContainer photos={images} />
+                    {/* <PhotoContainer photos={images} /> */}
                 ))}
                 <br />
                 <Divider />

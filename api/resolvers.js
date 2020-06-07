@@ -21,9 +21,10 @@ const Review = mongoose.model("Review", {
 
 const Place = mongoose.model("Place", {
     continentId: String,
+    regionId: String,
     name: String,
     description: String,
-    regionId: String
+    mainImageUrl: String
 });
 
 const Continent = mongoose.model("Continent", {

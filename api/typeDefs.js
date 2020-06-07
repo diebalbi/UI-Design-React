@@ -39,6 +39,7 @@ const typeDefs = gql`
         id: ID
         name: String!
         description: String!
+        mainImageUrl: String!
         continentId: ID!
         regionId: ID
     }
@@ -91,6 +92,7 @@ const typeDefs = gql`
     input RegisterPlace {
         name: String!
         description: String!
+        mainImageUrl: String!
         continentId: ID!
         regionId: ID
     }
