@@ -4,6 +4,9 @@ import Divider from '@material-ui/core/Divider';
 import { gql } from "apollo-boost";
 import { useQuery } from '@apollo/react-hooks';
 import PhotoContainer from "./PhotoContainer";
+import Spinner from 'react-bootstrap/Spinner'
+import Row from 'react-bootstrap/Row'
+import Alert from 'react-bootstrap/Alert'
 
 const GET_PLACES = gql`
     query PlacesByContinent($continentId: ID!) {
@@ -26,9 +29,19 @@ const GET_PLACES_IMAGES = gql`
 const Continent = ({ continentId, name }) => {
     const { loading, error, data } = useQuery(GET_PLACES, { variables: { continentId } });
 
-    if (loading) return 'Loading...';
-    if (error) return `Error! ${error.message}`;
-
+    if (loading) return (
+        <Row className="justify-content-md-center">
+            <Spinner animation="border" />
+        </Row>
+    )
+    if (error) return (
+        <Alert variant="danger">
+            <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+            <p>
+                {error.message}
+            </p>
+        </Alert>
+    )
     return (
         <div>
             <Container maxWidth="md">

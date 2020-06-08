@@ -9,6 +9,7 @@ import logo from "../assets/whiteLogo.png";
 import Modal from '@material-ui/core/Modal';
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import Welcome from "./Welcome";
 
 const Logo = styled.img`
   width: 60px;
@@ -79,6 +80,7 @@ export default function ButtonAppBar() {
     );
 
     return (
+        <div>
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
@@ -107,6 +109,8 @@ export default function ButtonAppBar() {
                 </div>
 
             </Modal>
+        </div>
+            <Welcome />
         </div>
     );
 }
