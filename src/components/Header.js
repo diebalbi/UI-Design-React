@@ -10,6 +10,7 @@ import Modal from '@material-ui/core/Modal';
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import Welcome from "./Welcome";
+import Navbar from 'react-bootstrap/Navbar'
 
 const Logo = styled.img`
   width: 60px;
@@ -54,6 +55,7 @@ export default function ButtonAppBar() {
     const [modalStyle] = React.useState(getModalStyle);
     const [openLogin, setOpenLogin] = React.useState(false);
     const [openRegister, setOpenRegister] = React.useState(false);
+    const userId = localStorage.getItem('userId') != null;
 
     const handleOpenLogin = () => {
         setOpenLogin(true);
@@ -71,6 +73,10 @@ export default function ButtonAppBar() {
         setOpenRegister(false);
     };
 
+    const handleCloseSession = () => {
+        localStorage.clear();
+    }
+
     const bodyLoginForm = (
         <LoginForm />
     );
@@ -81,35 +87,48 @@ export default function ButtonAppBar() {
 
     return (
         <div>
-        <div className={classes.root}>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
-                        <Logo src={logo} />
-                    </Typography>
-                    <Button color="inherit" >Home</Button>
-                    <Button color="inherit" onClick={handleOpenLogin}>Login</Button>
-                    <Button color="inherit" onClick={handleOpenRegister}>Register</Button>
-                </Toolbar>
-            </AppBar>
-            <Modal
-                open={openLogin}
-                onClose={handleCloseLogin}
-            >
-                <div style={modalStyle} className={classes.paper}>
-                    {bodyLoginForm}
-                </div>
-            </Modal>
-            <Modal
-                open={openRegister}
-                onClose={handleCloseRegister}
-            >
-                <div style={modalStyle} className={classes.paper}>
-                    {bodyRegisterForm}
-                </div>
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <Typography variant="h6" className={classes.title}>
+                            <a>
+                                <Logo src={logo} />
+                                Omega Travel
+                            </a>
+                        </Typography>
+                        <Button color="inherit" >Home</Button>
+                        {userId == '' ?
+                            <Button color="inherit" onClick={handleOpenLogin}>Login</Button>
+                            : ''
+                        }
+                        {userId == '' ?
+                            <Button color="inherit" onClick={handleOpenRegister}>Register</Button>
+                            : ''
+                        }
+                        {userId != '' ?
+                            <Button color="inherit" onClick={handleCloseSession}>Logout</Button>
+                            : ''
+                        }
+                    </Toolbar>
+                </AppBar>
+                <Modal
+                    open={openLogin}
+                    onClose={handleCloseLogin}
+                >
+                    <div style={modalStyle} className={classes.paper}>
+                        {bodyLoginForm}
+                    </div>
+                </Modal>
+                <Modal
+                    open={openRegister}
+                    onClose={handleCloseRegister}
+                >
+                    <div style={modalStyle} className={classes.paper}>
+                        {bodyRegisterForm}
+                    </div>
 
-            </Modal>
-        </div>
+                </Modal>
+            </div>
             <Welcome />
         </div>
     );

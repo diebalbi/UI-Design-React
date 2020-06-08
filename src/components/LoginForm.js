@@ -26,74 +26,79 @@ const LOGIN = gql`
 
 const LoginForm = () => {
   const [login, { data, loading, error }] = useMutation(LOGIN);
+  var show = true;
 
-  return (
-    <Container maxWidth="sm">
-      <Logo src={logo} />
-      <Typography variant="h5">
-        Welcome to our platform, please login!
+  if ({ show }) {
+    return (
+      <Container maxWidth="sm">
+        <Logo src={logo} />
+        <Typography variant="h5">
+          Welcome to our platform, please login!
       </Typography>
-      <br />
-      <Formik
-        initialValues={{ email: '', password: ''}}
+        <br />
+        <Formik
+          initialValues={{ email: '', password: '' }}
           validationSchema={validations}
-          onSubmit = {(values, { setSubmitting }) => {
-            login({ 
-                variables: {
-                  input: values
-                },
-              }).then((result) => {
-                localStorage.setItem('userId', result.data.login.id);
-                const algo = result.data.login;
-                const userId = localStorage.getItem('userId');
-                console.log("Result", { algo });
-                console.log("Localstorage", { userId })
-              });
+          onSubmit={(values, { setSubmitting }) => {
+            login({
+              variables: {
+                input: values
+              },
+            }).then((result) => {
+              localStorage.setItem('userId', result.data.login.id);
+              const algo = result.data.login;
+              const userId = localStorage.getItem('userId');
+              console.log("Result", { algo });
+              console.log("Localstorage", { userId })
+              show = false;
+            });
 
           }}
         >
           {({
             values, errors, touched, handleChange, handleSubmit, isSubmitting
           }) => (
-            <div>
-              <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-                <FormContainer>
-                  <TextField
-                    error={errors.email && touched.email}
-                    helperText={errors.email && touched.email ? errors.email : ' '}
-                    variant="filled"
-                    id="email"
-                    label="Email"
-                    value={values.email}
-                    onChange={handleChange("email")}
-                  />
-                  <br />
-                  <TextField
-                    variant="filled"
-                    id="password"
-                    label="Password"
-                    type="password"
-                    value={values.password}
-                    onChange={handleChange("password")}
-                  />
-                  <br />
-                  <Button
-                    disabled={isSubmitting}
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                  >
-                    LOGIN
+              <div>
+                <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+                  <FormContainer>
+                    <TextField
+                      error={errors.email && touched.email}
+                      helperText={errors.email && touched.email ? errors.email : ' '}
+                      variant="filled"
+                      id="email"
+                      label="Email"
+                      value={values.email}
+                      onChange={handleChange("email")}
+                    />
+                    <br />
+                    <TextField
+                      variant="filled"
+                      id="password"
+                      label="Password"
+                      type="password"
+                      value={values.password}
+                      onChange={handleChange("password")}
+                    />
+                    <br />
+                    <Button
+                      disabled={isSubmitting}
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                    >
+                      LOGIN
                   </Button>
-                </FormContainer>
-              </form>
-              {loading && <p>Cargando...</p>}
-              {error && <p>Error</p>}
-            </div>
-        )}
-      </Formik>
-    </Container>
-  );
+                  </FormContainer>
+                </form>
+                {loading && <p>Cargando...</p>}
+                {error && <p>Error</p>}
+              </div>
+            )}
+        </Formik>
+      </Container>
+    );
+  }
+  return (<></>);
 };
 
 const Logo = styled.img`
