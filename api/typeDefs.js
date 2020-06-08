@@ -2,7 +2,6 @@ const { gql } = require("apollo-server-micro");
 
 const typeDefs = gql`
     type Query {
-        user(email: String!, password: String!): User
         users: [User]
         
         continents: [Continent]
@@ -66,6 +65,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
+        login(input: LoginInput!): User
         register(input: RegisterInput!): User!
         registerContinent(input: RegisterContinent!): Continent!
         registerRegion(input: RegisterRegion!): Region!
@@ -73,6 +73,11 @@ const typeDefs = gql`
         registerActivity(input: RegisterActivity!): Activity!
         registerImage(input: RegisterImage!): Image!
         registerReview(input: RegisterReview!): Review!
+    }
+
+    input LoginInput {
+        email: String!
+        password: String!
     }
 
     input RegisterInput {
