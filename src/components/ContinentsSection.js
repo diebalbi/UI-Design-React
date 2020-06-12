@@ -1,11 +1,19 @@
 import React from 'react';
 import { Container, Typography, TextField, Button } from "@material-ui/core";
-// import Continent from "./Continent";
+import Continent from "./Continent";
 import { gql } from "apollo-boost";
 import { useQuery } from '@apollo/react-hooks';
 import Spinner from 'react-bootstrap/Spinner'
 import Row from 'react-bootstrap/Row'
 import Alert from 'react-bootstrap/Alert'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useRouteMatch,
+    useParams
+} from "react-router-dom";
 
 const GET_CONTINENTS = gql`
     {
@@ -18,7 +26,6 @@ const GET_CONTINENTS = gql`
 
 const ContinentsSection = () => {
     const { loading, error, data } = useQuery(GET_CONTINENTS);
-
     if (loading) return (
         <Row className="justify-content-md-center">
             <Spinner animation="border" />
@@ -38,9 +45,10 @@ const ContinentsSection = () => {
             <Typography variant="h4" align="center">
                 Places by Continents
             </Typography>
-            {/* {data.continents.map(({ id, name }) => (
+
+            {data.continents.map(({ id, name }) => (
                 <Continent continentId={id} name={name} />
-            ))} */}
+            ))}
         </div>
     );
 }

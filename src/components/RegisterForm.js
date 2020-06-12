@@ -6,6 +6,14 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams
+} from "react-router-dom";
 
 const REGISTER_MUTATION = gql`
   mutation register($input: RegisterInput!) {
@@ -31,7 +39,7 @@ const validations = Yup.object().shape({
     .test(
       'Match',
       "Passwords don't match",
-      function(repeatPassword){
+      function (repeatPassword) {
         return repeatPassword === this.parent.password;
       })
 })
@@ -47,12 +55,12 @@ const RegisterForm = () => {
       </Typography>
       <br />
       <Formik
-        initialValues={{ fullname: '', email: '', password: '', repeatPassword: ''}}
+        initialValues={{ fullname: '', email: '', password: '', repeatPassword: '' }}
         validationSchema={validations}
-        onSubmit = {( {repeatPassword, ...values}, { setSubmitting }) => {
+        onSubmit={({ repeatPassword, ...values }, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
-            
+
             register({
               variables: {
                 input: values
@@ -68,62 +76,63 @@ const RegisterForm = () => {
         {({
           values, errors, touched, handleChange, handleSubmit, isSubmitting
         }) => (
-          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-          <FormContainer>
-            <TextField
-              error={errors.fullname && touched.fullname}
-              helperText={errors.fullname && touched.fullname ? errors.fullname : ' '}
-              variant="filled"
-              id="fullname"
-              label="Fullname"
-              value={values.fullname}
-              onChange={handleChange("fullname")}
-            />
-            <br />
-            <TextField
-              error={errors.email && touched.email}
-              helperText={errors.email && touched.email ? errors.email : ' '}
-              variant="filled"
-              id="email"
-              label="Email"
-              value={values.email}
-              onChange={handleChange("email")}
-            />
-            <br />
-            <TextField
-              error={errors.password && touched.password}
-              helperText={errors.password && touched.password ? errors.password : ' '}
-              variant="filled"
-              id="password"
-              label="Password"
-              type="password"
-              value={values.password}
-              onChange={handleChange("password")}
-            />
-            <br />
-            <TextField
-              error={errors.repeatPassword && touched.repeatPassword}
-              helperText={errors.repeatPassword && touched.repeatPassword ? errors.repeatPassword : ' '}
-              variant="filled"
-              id="repeatPassword"
-              label="Repeat password"
-              type="repeatPassword"
-              value={values.repeatPassword}
-              onChange={handleChange("repeatPassword")}
-            />
-            <br />
-            <Button
-              disabled={isSubmitting}
-              variant="contained"
-              color="primary"
-              type="submit"
-            >
-              REGISTER
-            </Button>
-          </FormContainer>
-        </form>
-        )}
+            <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+              <FormContainer>
+                <TextField
+                  error={errors.fullname && touched.fullname}
+                  helperText={errors.fullname && touched.fullname ? errors.fullname : ' '}
+                  variant="filled"
+                  id="fullname"
+                  label="Fullname"
+                  value={values.fullname}
+                  onChange={handleChange("fullname")}
+                />
+                <br />
+                <TextField
+                  error={errors.email && touched.email}
+                  helperText={errors.email && touched.email ? errors.email : ' '}
+                  variant="filled"
+                  id="email"
+                  label="Email"
+                  value={values.email}
+                  onChange={handleChange("email")}
+                />
+                <br />
+                <TextField
+                  error={errors.password && touched.password}
+                  helperText={errors.password && touched.password ? errors.password : ' '}
+                  variant="filled"
+                  id="password"
+                  label="Password"
+                  type="password"
+                  value={values.password}
+                  onChange={handleChange("password")}
+                />
+                <br />
+                <TextField
+                  error={errors.repeatPassword && touched.repeatPassword}
+                  helperText={errors.repeatPassword && touched.repeatPassword ? errors.repeatPassword : ' '}
+                  variant="filled"
+                  id="repeatPassword"
+                  label="Repeat password"
+                  type="repeatPassword"
+                  value={values.repeatPassword}
+                  onChange={handleChange("repeatPassword")}
+                />
+                <br />
+                <Button
+                  disabled={isSubmitting}
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  REGISTER
+                </Button>
+              </FormContainer>
+            </form>
+          )}
       </Formik>
+      <br />
     </Container>
   );
 };

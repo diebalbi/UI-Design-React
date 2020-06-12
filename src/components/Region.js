@@ -6,6 +6,16 @@ import Row from 'react-bootstrap/Row'
 import { gql } from "apollo-boost";
 import { useQuery } from '@apollo/react-hooks';
 import Alert from 'react-bootstrap/Alert'
+import Detail from "./Detail";
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useRouteMatch,
+    useParams
+} from "react-router-dom";
 
 const GET_PLACES = gql`
     query PlacesByRegion($regionId: ID!) {
@@ -17,6 +27,7 @@ const GET_PLACES = gql`
 `;
 
 const Region = ({ regionId, name }) => {
+    let match = useRouteMatch();
     const { loading, error, data } = useQuery(GET_PLACES, { variables: { regionId } });
 
     if (loading) return (
@@ -40,11 +51,14 @@ const Region = ({ regionId, name }) => {
                     {name}
                 </Typography>
                 <br />
-                {data.placesByRegion.map(({ id, name }) => (
-                    <div>
-                        <p> {id} : {name} </p>
-                    </div>
-                ))}
+                <Switch>
+                    {data.placesByRegion.map(({ id, name }) => (
+                        /*  <PhotoContainer photos={images} />  */
+                        <Route path={`${match.path}/:placeId`}>
+                            <Detail />
+                        </Route>
+                    ))}
+                </Switch>
                 <br />
                 <Divider />
                 <br />

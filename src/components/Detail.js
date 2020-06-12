@@ -14,6 +14,15 @@ import Spinner from 'react-bootstrap/Spinner'
 import Row from 'react-bootstrap/Row'
 import Alert from 'react-bootstrap/Alert'
 
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useRouteMatch,
+    useParams
+} from "react-router-dom";
+
 const GET_PLACE = gql`
     query GetPlace($placeId: ID!) {
         place(id: $placeId) {
@@ -41,7 +50,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Detail = ({ placeId }) => {
+function Detail() {
+    let { placeId } = useParams();
     const classes = useStyles();
     const { loading, error, data } = useQuery(GET_PLACE, { variables: { placeId } });
 

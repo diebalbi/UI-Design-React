@@ -11,6 +11,14 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import Welcome from "./Welcome";
 import Navbar from 'react-bootstrap/Navbar'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useRouteMatch,
+    useParams
+} from "react-router-dom";
 
 const Logo = styled.img`
   width: 60px;
@@ -91,22 +99,31 @@ export default function ButtonAppBar() {
                 <AppBar position="static">
                     <Toolbar>
                         <Typography variant="h6" className={classes.title}>
-                            <a>
+                            <Link to="/">
                                 <Logo src={logo} />
-                                Omega Travel
-                            </a>
+                                    Omega Travel
+                            </Link>
                         </Typography>
-                        <Button color="inherit" >Home</Button>
+
+                        <Link to="/">
+                            <Button color="inherit" >Home</Button>
+                        </Link>
                         {userId == '' ?
-                            <Button color="inherit" onClick={handleOpenLogin}>Login</Button>
+                            <Link to="/login">
+                                <Button color="inherit">Login</Button>
+                            </Link>
                             : ''
                         }
                         {userId == '' ?
-                            <Button color="inherit" onClick={handleOpenRegister}>Register</Button>
+                            <Link to="/register">
+                                <Button color="inherit">Register</Button>
+                            </Link>
                             : ''
                         }
                         {userId != '' ?
-                            <Button color="inherit" onClick={handleCloseSession}>Logout</Button>
+                            <Button color="inherit" onClick={handleCloseSession}>
+                                <Link to="/">Logout</Link>
+                            </Button>
                             : ''
                         }
                     </Toolbar>
@@ -129,7 +146,6 @@ export default function ButtonAppBar() {
 
                 </Modal>
             </div>
-            <Welcome />
         </div>
     );
 }

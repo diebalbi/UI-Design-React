@@ -6,6 +6,14 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams
+} from "react-router-dom";
 
 const validations = Yup.object().shape({
   email: Yup.string()
@@ -31,7 +39,7 @@ const LOGIN = gql`
 `;
 
 const LoginForm = () => {
-  const [ errorState, setErrorState ] = React.useState('');
+  const [errorState, setErrorState] = React.useState('');
   const [login, { loading, error }] = useMutation(LOGIN);
   var show = true;
 
@@ -53,7 +61,7 @@ const LoginForm = () => {
               variables: {
                 input: values
               },
-            }).then(({data}) => {
+            }).then(({ data }) => {
               if (data.login.ok) {
                 localStorage.setItem('userId', data.login.id);
                 show = false;
@@ -71,46 +79,48 @@ const LoginForm = () => {
           {({
             values, errors, touched, handleChange, handleSubmit, isSubmitting
           }) => (
-            <div>
-              <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-                <FormContainer>
-                  <TextField
-                    error={errors.email && touched.email}
-                    helperText={errors.email && touched.email ? errors.email : ' '}
-                    variant="filled"
-                    id="email"
-                    label="Email"
-                    value={values.email}
-                    onChange={handleChange("email")}
-                  />
-                  <br />
-                  <TextField
-                    error={errors.password && touched.password}
-                    helperText={errors.password && touched.password ? errors.password : ' '}
-                    variant="filled"
-                    id="password"
-                    label="Password"
-                    type="password"
-                    value={values.password}
-                    onChange={handleChange("password")}
-                  />
-                  <br />
-                  <Button
-                    disabled={isSubmitting}
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                  >
-                    LOGIN
-                  </Button>
-                </FormContainer>
-              </form>
-              {loading && <p>Cargando...</p>}
-              {error && <p>Error</p>}
-              {errorState && <p>{errorState}</p>}
-            </div>
-          )}
+              <div>
+                <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+                  <FormContainer>
+                    <TextField
+                      error={errors.email && touched.email}
+                      helperText={errors.email && touched.email ? errors.email : ' '}
+                      variant="filled"
+                      id="email"
+                      label="Email"
+                      value={values.email}
+                      onChange={handleChange("email")}
+                    />
+                    <br />
+                    <TextField
+                      error={errors.password && touched.password}
+                      helperText={errors.password && touched.password ? errors.password : ' '}
+                      variant="filled"
+                      id="password"
+                      label="Password"
+                      type="password"
+                      value={values.password}
+                      onChange={handleChange("password")}
+                    />
+                    <br />
+                    <Button
+                      disabled={isSubmitting}
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                    >
+                      
+                        LOGIN
+                    </Button>
+                  </FormContainer>
+                </form>
+                {loading && <p>Cargando...</p>}
+                {error && <p>Error</p>}
+                {errorState && <p>{errorState}</p>}
+              </div>
+            )}
         </Formik>
+        <br />
       </Container>
     );
   }

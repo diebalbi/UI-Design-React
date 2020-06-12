@@ -38,9 +38,9 @@ const RegionsSection = () => {
             <Typography variant="h4" align="center">
                 Places by Regions
             </Typography>
-            {/* {data.regions.map(({ id, name }) => (
+            {data.regions.map(({ id, name }) => (
                 <Region regionId={id} name={name} />
-            ))} */}
+            ))}
         </div>
     );
 }

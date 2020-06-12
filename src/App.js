@@ -6,7 +6,18 @@ import Header from './components/Header'
 import Footer from "./components/Footer";
 import ContinentsSection from "./components/ContinentsSection";
 import RegionsSection from "./components/RegionsSection";
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import Detail from "./components/Detail";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
+import Welcome from "./components/Welcome";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams
+} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./App.css";
@@ -16,9 +27,20 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Header />
-        {/* <Detail placeId={"5ecee28b15476c4fe8ff3ac9"}/> */}
-        <ContinentsSection />
-        <RegionsSection />
+
+        <Switch>
+          <Route path="/login">
+            <LoginForm />
+          </Route>
+          <Route path="/register">
+            <RegisterForm />
+          </Route>
+          <Route path="/">
+            <Welcome />
+            <ContinentsSection />
+            <RegionsSection />
+          </Route> 
+        </Switch>
         <Footer />
       </Router>
     </ApolloProvider>

@@ -7,6 +7,16 @@ import PhotoContainer from "./PhotoContainer";
 import Spinner from 'react-bootstrap/Spinner'
 import Row from 'react-bootstrap/Row'
 import Alert from 'react-bootstrap/Alert'
+import Detail from "./Detail";
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useRouteMatch,
+    useParams
+} from "react-router-dom";
 
 const GET_PLACES = gql`
     query PlacesByContinent($continentId: ID!) {
@@ -27,6 +37,7 @@ const GET_PLACES_IMAGES = gql`
 `;
 
 const Continent = ({ continentId, name }) => {
+    let match = useRouteMatch();
     const { loading, error, data } = useQuery(GET_PLACES, { variables: { continentId } });
 
     if (loading) return (
@@ -50,9 +61,14 @@ const Continent = ({ continentId, name }) => {
                     {name}
                 </Typography>
                 <br />
-                {data.placesByContinent.map(({ id, name }) => (
-                    {/* <PhotoContainer photos={images} /> */}
-                ))}
+                <Switch>
+                    {data.placesByContinent.map(({ id, name }) => (
+                        /*  <PhotoContainer photos={images} />  */
+                        <Route path={`${match.path}/:placeId`}>
+                            <Detail />
+                        </Route>
+                    ))}
+                </Switch>
                 <br />
                 <Divider />
                 <br />
