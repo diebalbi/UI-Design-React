@@ -18,14 +18,21 @@ const validations = Yup.object().shape({
 const LOGIN = gql`
   mutation login($input: LoginInput!) {
     login(input: $input) {      
-      id,
-      fullname
+      ok,
+      error,
+      user {
+        id,
+        fullname,
+        email,
+        password 
+      }
     }
   }
 `;
 
 const LoginForm = () => {
-  const [login, { data, loading, error }] = useMutation(LOGIN);
+  const [ errorState, setErrorState ] = React.useState('');
+  const [login, { loading, error }] = useMutation(LOGIN);
   var show = true;
 
   if ({ show }) {
@@ -33,24 +40,30 @@ const LoginForm = () => {
       <Container maxWidth="sm">
         <Logo src={logo} />
         <Typography variant="h5">
-          Welcome to our platform, please login!
-      </Typography>
+          Welcome to Omega Travel
+        </Typography>
         <br />
         <Formik
           initialValues={{ email: '', password: '' }}
           validationSchema={validations}
           onSubmit={(values, { setSubmitting }) => {
+            setErrorState('');
+
             login({
               variables: {
                 input: values
               },
-            }).then((result) => {
-              localStorage.setItem('userId', result.data.login.id);
-              const algo = result.data.login;
-              const userId = localStorage.getItem('userId');
-              console.log("Result", { algo });
-              console.log("Localstorage", { userId })
-              show = false;
+            }).then(({data}) => {
+              if (data.login.ok) {
+                localStorage.setItem('userId', data.login.id);
+                show = false;
+              }
+              else {
+                setErrorState(data.login.error);
+                setSubmitting(false);
+              }
+            }).catch((e) => {
+              setSubmitting(false);
             });
 
           }}
@@ -58,42 +71,45 @@ const LoginForm = () => {
           {({
             values, errors, touched, handleChange, handleSubmit, isSubmitting
           }) => (
-              <div>
-                <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-                  <FormContainer>
-                    <TextField
-                      error={errors.email && touched.email}
-                      helperText={errors.email && touched.email ? errors.email : ' '}
-                      variant="filled"
-                      id="email"
-                      label="Email"
-                      value={values.email}
-                      onChange={handleChange("email")}
-                    />
-                    <br />
-                    <TextField
-                      variant="filled"
-                      id="password"
-                      label="Password"
-                      type="password"
-                      value={values.password}
-                      onChange={handleChange("password")}
-                    />
-                    <br />
-                    <Button
-                      disabled={isSubmitting}
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                    >
-                      LOGIN
+            <div>
+              <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+                <FormContainer>
+                  <TextField
+                    error={errors.email && touched.email}
+                    helperText={errors.email && touched.email ? errors.email : ' '}
+                    variant="filled"
+                    id="email"
+                    label="Email"
+                    value={values.email}
+                    onChange={handleChange("email")}
+                  />
+                  <br />
+                  <TextField
+                    error={errors.password && touched.password}
+                    helperText={errors.password && touched.password ? errors.password : ' '}
+                    variant="filled"
+                    id="password"
+                    label="Password"
+                    type="password"
+                    value={values.password}
+                    onChange={handleChange("password")}
+                  />
+                  <br />
+                  <Button
+                    disabled={isSubmitting}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                  >
+                    LOGIN
                   </Button>
-                  </FormContainer>
-                </form>
-                {loading && <p>Cargando...</p>}
-                {error && <p>Error</p>}
-              </div>
-            )}
+                </FormContainer>
+              </form>
+              {loading && <p>Cargando...</p>}
+              {error && <p>Error</p>}
+              {errorState && <p>{errorState}</p>}
+            </div>
+          )}
         </Formik>
       </Container>
     );

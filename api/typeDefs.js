@@ -27,6 +27,7 @@ const typeDefs = gql`
     type Continent {
         id: ID
         name: String!
+        places: [Place]
     }
     
     type Region {
@@ -64,8 +65,14 @@ const typeDefs = gql`
         description: String!
     }
 
+    type LoginResponse {
+        user: User
+        ok: Boolean!
+        error: String
+    }
+
     type Mutation {
-        login(input: LoginInput!): User
+        login(input: LoginInput!): LoginResponse
         register(input: RegisterInput!): User!
         registerContinent(input: RegisterContinent!): Continent!
         registerRegion(input: RegisterRegion!): Region!

@@ -28,7 +28,7 @@ const Place = mongoose.model("Place", {
 });
 
 const Continent = mongoose.model("Continent", {
-    name: String
+    name: String,
 });
 
 const Region = mongoose.model("Region", {
@@ -53,7 +53,7 @@ const resolvers = {
             return Place.find({ continentId: args.continentId });
         },
         placesByRegion: (_, args) => {
-            return Place.find({ continentId: args.continentId });
+            return Place.find({ regionId: args.regionId });
         },
         place: (_, args) => {
             return Place.findById(args.id);
@@ -74,15 +74,35 @@ const resolvers = {
             return Review.find({ placeId: args.placeId });
         },
         users: () => User.find(),
-        continents: () => Continent.find(),
+        continents: async () => { 
+            const continents = await Continent.find();
+            return continents;
+        },
         regions: () => Region.find()
     },
+    Continent: {
+        places(parent) {
+            return Place.find({ continentId: parent.id });
+        }
+    },
     Mutation: {
-        login: (_, { input }) => { 
-            return User.findOne({
+        login: async (_, { input }) => { 
+            const user = await User.findOne({
                 email: input.email, 
                 password: input.password
             });
+            if (user === null) {
+                return {
+                    ok: false,
+                    error: "User not found"
+                };
+            }
+            else {
+                return {
+                    ok: true,
+                    user,
+                }
+            }
         },
         register: (_, { input }) => {
             const user = new User(input);
