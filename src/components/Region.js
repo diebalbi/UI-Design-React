@@ -6,7 +6,6 @@ import Row from 'react-bootstrap/Row'
 import { gql } from "apollo-boost";
 import { useQuery } from '@apollo/react-hooks';
 import Alert from 'react-bootstrap/Alert'
-import Detail from "./Detail";
 import Card from 'react-bootstrap/Card'
 import styled from "styled-components";
 

@@ -6,7 +6,6 @@ import { useQuery } from '@apollo/react-hooks';
 import Spinner from 'react-bootstrap/Spinner'
 import Row from 'react-bootstrap/Row'
 import Alert from 'react-bootstrap/Alert'
-import Detail from "./Detail";
 import Card from 'react-bootstrap/Card'
 import styled from "styled-components";
 import {
@@ -37,7 +36,6 @@ const CustomCard = styled.div`
 `;
 
 const Continent = ({ continentId, name }) => {
-    let match = useRouteMatch();
     const { loading, error, data } = useQuery(GET_PLACES, { variables: { continentId } });
 
     if (loading) return (
