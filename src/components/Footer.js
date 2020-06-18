@@ -27,11 +27,9 @@ export default function Album() {
   return (
     <React.Fragment>
       <CssBaseline />
-      {/* Footer */}
       <footer className={classes.footer}>
         <Copyright />
       </footer>
-      {/* End footer */}
     </React.Fragment>
   );
 }

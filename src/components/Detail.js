@@ -135,6 +135,9 @@ const Detail = () => {
                 <br />
                 <Divider />
                 <br />
+                <Typography variant="h5">
+                    Activities
+                </Typography>
                 <Activities activities={data.place.activities} />
                 <br />
                 <Divider />

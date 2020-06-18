@@ -41,9 +41,6 @@ const Activities = ({ activities }) => {
     if (activities.length == 0) {
         return (
             <div>
-                <Typography variant="h5">
-                    Activities
-                </Typography>
                 <br />
                 <Alert severity="warning">
                     <p>
@@ -55,9 +52,6 @@ const Activities = ({ activities }) => {
     }
     return (
         <Container maxWidth="md">
-            <Typography variant="h5">
-                Activities
-            </Typography>
             <br />
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
