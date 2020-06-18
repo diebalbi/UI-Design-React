@@ -15,11 +15,7 @@ import Row from 'react-bootstrap/Row'
 import { Alert } from '@material-ui/lab';
 
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link,
-    useRouteMatch,
     useParams
 } from "react-router-dom";
 
@@ -90,26 +86,27 @@ const Detail = () => {
             <p>{error.message}</p>
         </Alert>
     )
+
     return (
         <div>
             <Container maxWidth="md">
                 <br />
-                <Typography variant="h4">
+                <Typography variant="h3">
                     {data.place.name}
                 </Typography>
                 <div className={classes.root}>
-                    <Rating name="size-small" defaultValue={getStars({ data })} size="small" />
+                    <Rating name="size-small" defaultValue={getStars({ data })} readOnly />
                 </div>
                 <br />
                 <Carousel>
-                    {data.place.images.map(({ url }) => (
-                        <div>
-                            <img src="https://photos.mandarinoriental.com/is/image/MandarinOriental/paris-2017-home?$MO_masthead-property-mobile$" />
+                    {data.place.images.map(({ id, url }) => (
+                        <div key={id}>
+                            <img src="https://photos.mandarinoriental.com/is/image/MandarinOriental/paris-2017-home?$MO_masthead-property-mobile$" alt="" />
                             {/* <img src={url} /> */}
                         </div>
                     ))}
                 </Carousel>
-                {(data.place.images).length == 0 &&
+                {(data.place.images).length === 0 &&
                     <div>
                         <Alert severity="warning">
                             <p>
@@ -121,36 +118,36 @@ const Detail = () => {
                 }
                 <Divider />
                 <br />
-                <Typography variant="h5">
+                <Typography variant="h4">
                     Description
                 </Typography>
                 <br />
-                <Typography variant="h6">
+                <Typography variant="body1">
                     {data.place.description}
                 </Typography>
                 <br />
                 <br />
                 <Divider />
                 <br />
-                <Typography variant="h5">
+                <Typography variant="h4">
                     Activities
                 </Typography>
                 <Activities activities={data.place.activities} />
                 <br />
                 <Divider />
                 <br />
-                <Typography variant="h5">
+                <Typography variant="h4">
                     Comments
                 </Typography>
                 <br />
                 {data.place.reviews &&
-                    data.place.reviews.map(({ name, rating, description }) => (
-                        <div>
-                            <GivenReview name="test" rating={rating} description={description} />
+                    data.place.reviews.map(({ id, user, rating, description }) => (
+                        <div key={id}>
+                            <GivenReview name={user.fullname} rating={rating} description={description} />
                         </div>
                     ))
                 }
-                {(data.place.reviews).length == 0 &&
+                {(data.place.reviews).length === 0 &&
                     <Alert severity="warning">
                         <p>
                             There are no comments for this city, send us your review! ;)
@@ -160,7 +157,7 @@ const Detail = () => {
                 <br />
                 <Divider />
                 <br />
-                {userId != '' ?
+                {userId !== '' ?
                     <AddReview />
                     : <Alert severity="warning">
                         <p>

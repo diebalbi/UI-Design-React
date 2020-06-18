@@ -70,7 +70,7 @@ const Region = ({ regionId, name }) => {
                                 <Link to={"/place/" + id} style={{ color: '#FFF', textDecoration: 'none' }} >
                                     <CustomCard style={{ padding: "2%" }}>
                                         <Card>
-                                            <img src={mainImageUrl} alt="region main photo" />
+                                            <img src={mainImageUrl} alt="main region" />
 
                                             <Card.Body style={{ backgroundColor: "#1976d2" }} >
                                                 <Card.Title>{name}</Card.Title>

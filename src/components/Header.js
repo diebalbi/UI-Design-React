@@ -12,12 +12,7 @@ import RegisterForm from "./RegisterForm";
 import Welcome from "./Welcome";
 import Navbar from 'react-bootstrap/Navbar'
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link,
-    useRouteMatch,
-    useParams
 } from "react-router-dom";
 
 const Logo = styled.img`
@@ -108,19 +103,19 @@ export default function ButtonAppBar() {
                         <Link to="/" style={{ color: '#FFF' }} >
                             <Button color="inherit">Home</Button>
                         </Link>
-                        {userId == '' ?
+                        {userId === '' ?
                             <Link to="/login" style={{ color: '#FFF' }} >
                                 <Button color="inherit">Login</Button>
                             </Link>
                             : ''
                         }
-                        {userId == '' ?
+                        {userId === '' ?
                             <Link to="/register" style={{ color: '#FFF' }} >
                                 <Button color="inherit">Register</Button>
                             </Link>
                             : ''
                         }
-                        {userId != '' ?
+                        {userId !== '' ?
                             <Button color="inherit" onClick={handleCloseSession} >
                                 <Link to="/" style={{ color: '#FFF' }} >Logout</Link>
                             </Button>

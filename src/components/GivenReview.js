@@ -23,7 +23,7 @@ const Review = ({ name, rating, description }) => {
             <div className={classes.root}>
                 <Rating name="size-small" defaultValue={rating} size="small" />
             </div>
-            <Typography variant="h8">
+            <Typography variant="body1">
                 {description}
                 <br />
             </Typography>
