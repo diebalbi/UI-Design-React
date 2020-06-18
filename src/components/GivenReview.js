@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Review = ({name, rating, description}) => {
+const Review = ({ name, rating, description }) => {
     const classes = useStyles();
     return (
         <Container maxWidth="md">

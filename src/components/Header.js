@@ -99,7 +99,7 @@ export default function ButtonAppBar() {
                 <AppBar position="static">
                     <Toolbar>
                         <Typography variant="h6" className={classes.title}>
-                            <Link to="/" style={{ color: '#FFF', textDecoration:'none' }} >
+                            <Link to="/" style={{ color: '#FFF', textDecoration: 'none' }} >
                                 <Logo src={logo} />
                                     Omega Travel
                             </Link>

@@ -65,7 +65,6 @@ const LoginForm = () => {
               },
             }).then(({ data }) => {
               if (data.login.ok) {
-                console.log(data);
                 localStorage.setItem('userId', data.login.user.id);
                 localStorage.setItem('name', data.login.user.fullname);
                 show = false;
@@ -118,10 +117,10 @@ const LoginForm = () => {
                     </Button>
                   </FormContainer>
                 </form>
-                {loading && 
-                <Row className="justify-content-md-center">
-                  <Spinner animation="border" />
-                </Row>}
+                {loading &&
+                  <Row className="justify-content-md-center">
+                    <Spinner animation="border" />
+                  </Row>}
                 {error && <p>Error</p>}
                 {errorState && <p>{errorState}</p>}
               </div>

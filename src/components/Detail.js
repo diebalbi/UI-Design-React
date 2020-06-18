@@ -56,10 +56,11 @@ const GET_PLACE = gql`
 function getStars(data) {
     var stars = 0;
     var count = 0;
-    for (const [index, value] of data) {
-        stars += value.reviews.rating;
+    var reviews = data.data.place.reviews;
+    reviews.forEach(function (value, i) {
+        stars += value.rating;
         count += 1;
-    }
+    });
     return stars / count;
 }
 
@@ -96,9 +97,8 @@ const Detail = () => {
                 <Typography variant="h4">
                     {data.place.name}
                 </Typography>
-
                 <div className={classes.root}>
-                    <Rating name="size-small" defaultValue="5" size="small" />
+                    <Rating name="size-small" defaultValue={getStars({ data })} size="small" />
                 </div>
                 <br />
                 <Carousel>
@@ -109,26 +109,23 @@ const Detail = () => {
                         </div>
                     ))}
                 </Carousel>
-
                 {(data.place.images).length == 0 &&
                     <div>
                         <Alert severity="warning">
                             <p>
                                 There are no photos for this city yet...
-                        </p>
+                            </p>
                         </Alert>
                         <br />
                     </div>
                 }
-
                 <Divider />
-
                 <br />
                 <Typography variant="h5">
                     Description
                 </Typography>
                 <br />
-                <Typography variant="h7">
+                <Typography variant="h6">
                     {data.place.description}
                 </Typography>
                 <br />
@@ -160,7 +157,6 @@ const Detail = () => {
                         </p>
                     </Alert>
                 }
-
                 <br />
                 <Divider />
                 <br />
