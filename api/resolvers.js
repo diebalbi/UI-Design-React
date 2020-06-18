@@ -77,10 +77,7 @@ const resolvers = {
             return Review.find({ placeId: args.placeId });
         },
         users: () => User.find(),
-        continents: async () => { 
-            const continents = await Continent.find();
-            return continents;
-        },
+        continents: () => Continent.find(),
         regions: () => Region.find()
     },
     Continent: {
@@ -106,7 +103,7 @@ const resolvers = {
     },
     Review: {
         user(parent) {
-            return User.findOne({ id : parent.userId });
+            return User.findById(parent.userId);
         }
     },
     Mutation: {

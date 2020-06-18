@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, TextField, Button } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import Region from "./Region";
 import { gql } from "apollo-boost";
 import { useQuery } from '@apollo/react-hooks';
@@ -39,7 +39,7 @@ const RegionsSection = () => {
                 Places by Regions
             </Typography>
             {data.regions.map(({ id, name }) => (
-                <Region regionId={id} name={name} />
+                <Region regionId={id} name={name} key={id}/>
             ))}
         </div>
     );

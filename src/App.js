@@ -12,10 +12,7 @@ import Welcome from "./components/Welcome";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
+  Route
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 

@@ -7,8 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Container, Typography, TextField, Button } from "@material-ui/core";
-import Divider from '@material-ui/core/Divider';
+import { Container } from "@material-ui/core";
 import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles({
@@ -38,7 +37,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 const Activities = ({ activities }) => {
     const classes = useStyles();
-    if (activities.length == 0) {
+    if (activities.length === 0) {
         return (
             <div>
                 <br />
