@@ -8,6 +8,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Row from 'react-bootstrap/Row'
 import Spinner from 'react-bootstrap/Spinner'
+import { withRouter } from 'react-router-dom';
 import {
   BrowserRouter as Router,
   Switch,
@@ -48,10 +49,12 @@ const LoginForm = () => {
   if ({ show }) {
     return (
       <Container maxWidth="sm">
-        <Logo src={logo} />
-        <Typography variant="h5">
-          Welcome to Omega Travel
+        <div style={{ textAlign: "center" }}>
+          <Logo src={logo} />
+          <Typography variant="h4">
+            Login
         </Typography>
+        </div>
         <br />
         <Formik
           initialValues={{ email: '', password: '' }}
@@ -76,7 +79,6 @@ const LoginForm = () => {
             }).catch((e) => {
               setSubmitting(false);
             });
-
           }}
         >
           {({
@@ -112,7 +114,6 @@ const LoginForm = () => {
                       color="primary"
                       type="submit"
                     >
-
                       LOGIN
                     </Button>
                   </FormContainer>
@@ -144,4 +145,4 @@ const FormContainer = styled.div`
   flex-direction: column;
 `;
 
-export default LoginForm;
+export default withRouter(LoginForm);

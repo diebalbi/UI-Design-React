@@ -22,15 +22,11 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Header />
-        <Welcome />
+        <Route path="/" component={Header} />
+        <Route path="/" component={Welcome} />
         <Switch>
-          <Route path="/login">
-            <LoginForm />
-          </Route>
-          <Route path="/register">
-            <RegisterForm />
-          </Route>
+          <Route path="/login" component={LoginForm} />
+          <Route path="/register" component={RegisterForm} />
           <Route path="/place/:placeId">
             <Detail />
           </Route>

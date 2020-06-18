@@ -49,10 +49,12 @@ const RegisterForm = () => {
 
   return (
     <Container maxWidth="sm">
-      <Logo src={logo} />
-      <Typography variant="h5">
-        Welcome to our platform, please register!
+      <div style={{ textAlign: "center" }}>
+        <Logo src={logo} />
+        <Typography variant="h4">
+          Register
       </Typography>
+      </div>
       <br />
       <Formik
         initialValues={{ fullname: '', email: '', password: '', repeatPassword: '' }}
