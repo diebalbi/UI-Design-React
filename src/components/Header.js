@@ -99,30 +99,30 @@ export default function ButtonAppBar() {
                 <AppBar position="static">
                     <Toolbar>
                         <Typography variant="h6" className={classes.title}>
-                            <Link to="/">
+                            <Link to="/" style={{ color: '#FFF', textDecoration:'none' }} >
                                 <Logo src={logo} />
                                     Omega Travel
                             </Link>
                         </Typography>
 
-                        <Link to="/">
-                            <Button color="inherit" >Home</Button>
+                        <Link to="/" style={{ color: '#FFF' }} >
+                            <Button color="inherit">Home</Button>
                         </Link>
                         {userId == '' ?
-                            <Link to="/login">
+                            <Link to="/login" style={{ color: '#FFF' }} >
                                 <Button color="inherit">Login</Button>
                             </Link>
                             : ''
                         }
                         {userId == '' ?
-                            <Link to="/register">
+                            <Link to="/register" style={{ color: '#FFF' }} >
                                 <Button color="inherit">Register</Button>
                             </Link>
                             : ''
                         }
                         {userId != '' ?
-                            <Button color="inherit" onClick={handleCloseSession}>
-                                <Link to="/">Logout</Link>
+                            <Button color="inherit" onClick={handleCloseSession} >
+                                <Link to="/" style={{ color: '#FFF' }} >Logout</Link>
                             </Button>
                             : ''
                         }

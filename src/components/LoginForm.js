@@ -6,6 +6,8 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import Row from 'react-bootstrap/Row'
+import Spinner from 'react-bootstrap/Spinner'
 import {
   BrowserRouter as Router,
   Switch,
@@ -63,7 +65,9 @@ const LoginForm = () => {
               },
             }).then(({ data }) => {
               if (data.login.ok) {
-                localStorage.setItem('userId', data.login.id);
+                console.log(data);
+                localStorage.setItem('userId', data.login.user.id);
+                localStorage.setItem('name', data.login.user.fullname);
                 show = false;
               }
               else {
@@ -109,12 +113,15 @@ const LoginForm = () => {
                       color="primary"
                       type="submit"
                     >
-                      
-                        LOGIN
+
+                      LOGIN
                     </Button>
                   </FormContainer>
                 </form>
-                {loading && <p>Cargando...</p>}
+                {loading && 
+                <Row className="justify-content-md-center">
+                  <Spinner animation="border" />
+                </Row>}
                 {error && <p>Error</p>}
                 {errorState && <p>{errorState}</p>}
               </div>

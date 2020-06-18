@@ -2,7 +2,6 @@ import React from "react";
 import { ApolloProvider } from "@apollo/react-hooks";
 import client from "./client";
 import Header from './components/Header'
-// import Detail from './components/Detail'
 import Footer from "./components/Footer";
 import ContinentsSection from "./components/ContinentsSection";
 import RegionsSection from "./components/RegionsSection";
@@ -27,7 +26,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Header />
-
+        <Welcome />
         <Switch>
           <Route path="/login">
             <LoginForm />
@@ -35,11 +34,13 @@ function App() {
           <Route path="/register">
             <RegisterForm />
           </Route>
+          <Route path="/place/:placeId">
+            <Detail />
+          </Route>
           <Route path="/">
-            <Welcome />
             <ContinentsSection />
             <RegionsSection />
-          </Route> 
+          </Route>
         </Switch>
         <Footer />
       </Router>
