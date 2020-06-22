@@ -1,7 +1,7 @@
 import React from "react";
 import { SafeAreaView, SectionList } from "react-native";
 import styled from "styled-components/native";
-import { Text } from "react-native-paper";
+import { Headline  } from "react-native-paper";
 import { Place } from "../Place";
 
 const data = [
@@ -85,7 +85,7 @@ export const Layout = ({navigation}) => (
           <Place name={item.name} mainImageUrl={item.mainImageUrl} placeId={item.id} navigation={navigation} />
         }
         renderSectionHeader={({ section: { title } }) => (
-          <Text>{title}</Text>
+          <Headline  style={{marginVertical: 10}}>{title}</Headline>
         )}
       />
     </SafeAreaView>
