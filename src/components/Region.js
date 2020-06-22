@@ -1,29 +1,39 @@
 import React from 'react';
-import { Container, Typography, TextField, Button } from "@material-ui/core";
+import { Container, Typography } from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import Spinner from 'react-bootstrap/Spinner'
 import Row from 'react-bootstrap/Row'
 import { gql } from "apollo-boost";
 import { useQuery } from '@apollo/react-hooks';
 import Alert from 'react-bootstrap/Alert'
-import Detail from "./Detail";
+import Card from 'react-bootstrap/Card'
+import styled from "styled-components";
 
 import {
-    BrowserRouter as Router,
     Switch,
-    Route,
     Link,
     useRouteMatch,
-    useParams
 } from "react-router-dom";
 
 const GET_PLACES = gql`
     query PlacesByRegion($regionId: ID!) {
         placesByRegion(regionId: $regionId) {
             id,
-            name
+            name,
+            mainImageUrl
         }
     }
+`;
+
+const CustomCard = styled.div`
+  object-fit: contain;
+  display: inline-flex;
+  text-align: center;
+  img {
+    text-align: -webkit-center;
+    float: left;
+    width: 100%;
+  }
 `;
 
 const Region = ({ regionId, name }) => {
@@ -32,7 +42,9 @@ const Region = ({ regionId, name }) => {
 
     if (loading) return (
         <Row className="justify-content-md-center">
+            <br />
             <Spinner animation="border" />
+            <br />
         </Row>
     )
     if (error) return (
@@ -45,24 +57,35 @@ const Region = ({ regionId, name }) => {
     )
     return (
         <div>
-            <Container maxWidth="md">
-                <br />
-                <Typography variant="h5">
-                    {name}
-                </Typography>
-                <br />
-                <Switch>
-                    {data.placesByRegion.map(({ id, name }) => (
-                        /*  <PhotoContainer photos={images} />  */
-                        <Route path={`${match.path}/:placeId`}>
-                            <Detail />
-                        </Route>
-                    ))}
-                </Switch>
-                <br />
-                <Divider />
-                <br />
-            </Container>
+            <div>
+                <Container maxWidth="md">
+                    <br />
+                    <Typography variant="h5">
+                        {name}
+                    </Typography>
+                    <br />
+                    <Switch>
+                        {data.placesByRegion.map(({ id, name, mainImageUrl }) => (
+                            <div style={{ textAlign: "center" }} key={id}>
+                                <Link to={"/place/" + id} style={{ color: '#FFF', textDecoration: 'none' }} >
+                                    <CustomCard style={{ padding: "2%" }}>
+                                        <Card>
+                                            <img src={mainImageUrl} alt="main region" />
+
+                                            <Card.Body style={{ backgroundColor: "#1976d2" }} >
+                                                <Card.Title>{name}</Card.Title>
+                                            </Card.Body>
+                                        </Card>
+                                    </CustomCard>
+                                </Link>
+                            </div>
+                        ))}
+                    </Switch>
+                    <br />
+                    <Divider />
+                    <br />
+                </Container>
+            </div>
         </div>
     );
 }

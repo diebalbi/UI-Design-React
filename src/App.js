@@ -2,7 +2,6 @@ import React from "react";
 import { ApolloProvider } from "@apollo/react-hooks";
 import client from "./client";
 import Header from './components/Header'
-// import Detail from './components/Detail'
 import Footer from "./components/Footer";
 import ContinentsSection from "./components/ContinentsSection";
 import RegionsSection from "./components/RegionsSection";
@@ -13,10 +12,7 @@ import Welcome from "./components/Welcome";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
+  Route
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -26,20 +22,18 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Header />
-
+        <Route path="/" component={Header} />
+        <Route path="/" component={Welcome} />
         <Switch>
-          <Route path="/login">
-            <LoginForm />
-          </Route>
-          <Route path="/register">
-            <RegisterForm />
+          <Route path="/login" component={LoginForm} />
+          <Route path="/register" component={RegisterForm} />
+          <Route path="/place/:placeId">
+            <Detail />
           </Route>
           <Route path="/">
-            <Welcome />
             <ContinentsSection />
             <RegionsSection />
-          </Route> 
+          </Route>
         </Switch>
         <Footer />
       </Router>

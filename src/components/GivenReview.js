@@ -13,18 +13,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Review = ({name, rating, description}) => {
+const Review = ({ name, rating, description }) => {
     const classes = useStyles();
-
     return (
         <Container maxWidth="md">
-            <Typography variant="h7">
+            <Typography variant="h6">
                 {name}
             </Typography>
             <div className={classes.root}>
                 <Rating name="size-small" defaultValue={rating} size="small" />
             </div>
-            <Typography variant="h8">
+            <Typography variant="body1">
                 {description}
                 <br />
             </Typography>

@@ -1,18 +1,19 @@
 import React from 'react';
-import Alert from 'react-bootstrap/Alert'
+import { Alert } from '@material-ui/lab';
 
-const Welcome = ({name}) => {
+const Welcome = () => {
     const userId = localStorage.getItem('userId');
-    if(userId) return (
+    const fullname = localStorage.getItem('name');
+    if (userId) return (
         <div>
-            <Alert variant="success">
-                Welcome!, you are logged in as {name}.
+            <Alert severity="success">
+                Welcome!, you are logged in as {fullname}.
             </Alert>
         </div>
     );
-    return(
+    return (
         <div>
-            <Alert variant="warning">
+            <Alert severity="warning">
                 You are not logged in. Please login to see our full potential ;)
             </Alert>
         </div>

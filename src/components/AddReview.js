@@ -1,10 +1,29 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Container, Typography, TextField, Button } from "@material-ui/core";
+import { Typography, TextField, Button } from "@material-ui/core";
 import { Formik } from "formik";
 import Rating from '@material-ui/lab/Rating';
+import { gql } from "apollo-boost";
+import { useMutation } from "@apollo/react-hooks";
+
+const REGISTER_REVIEW = gql`
+  mutation registerReview($input: RegisterReview!) {
+    registerReview(input: $input) {      
+      ok,
+      error,
+      review {
+        userId,
+        placeId,
+        rating,
+        description,
+      }
+    }
+  }
+`;
 
 const AddReview = () => {
+    const [review, { loading, error }] = useMutation(REGISTER_REVIEW);
+
     return (
         <Formik
             initialValues={{ email: '', password: '' }}
@@ -26,10 +45,8 @@ const AddReview = () => {
                             <br />
                             <TextField
                                 id="outlined-multiline-static"
-                                label="Multiline"
                                 multiline
                                 rows={4}
-                                defaultValue="Default Value"
                                 variant="outlined"
                             />
                             <br />

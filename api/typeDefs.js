@@ -2,6 +2,7 @@ const { gql } = require("apollo-server-micro");
 
 const typeDefs = gql`
     type Query {
+        user(id: ID!): User
         users: [User]
         
         continents: [Continent]
@@ -14,7 +15,7 @@ const typeDefs = gql`
         activities(placeId: ID!): [Activity]
         images(placeId: ID!): [Image]
         image(placeId: ID!): Image
-        reviewes(placeId: ID!): [Review]
+        reviews(placeId: ID!): [Review]
     }
 
     type User {
@@ -34,6 +35,7 @@ const typeDefs = gql`
     type Region {
         id: ID
         name: String!
+        places: [Place]
     }
 
     type Place {
@@ -43,6 +45,9 @@ const typeDefs = gql`
         mainImageUrl: String!
         continentId: ID!
         regionId: ID
+        images: [Image]
+        activities: [Activity]
+        reviews: [Review]
     }
 
     type Activity {
@@ -64,6 +69,7 @@ const typeDefs = gql`
         placeId: ID!
         rating: Int!
         description: String!
+        user: User
     }
 
     type LoginResponse {

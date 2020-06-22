@@ -61,6 +61,9 @@ const resolvers = {
         place: (_, args) => {
             return Place.findById(args.id);
         },
+        user: (_, args) => {
+            return User.findById(args.id);
+        },
         activities: (_, args) => {
             return Activity.find({ placeId: args.placeId });
         },
@@ -73,19 +76,37 @@ const resolvers = {
         region: (_, args, context, info) => {
             return Region.findById(args.id);
         },
-        reviewes: (_, args, context, info) => {
+        reviews: (_, args, context, info) => {
             return Review.find({ placeId: args.placeId });
         },
         users: () => User.find(),
-        continents: async () => { 
-            const continents = await Continent.find();
-            return continents;
-        },
+        continents: () => Continent.find(),
         regions: () => Region.find()
     },
     Continent: {
         places(parent) {
             return Place.find({ continentId: parent.id });
+        }
+    },
+    Region: {
+        places(parent) {
+            return Place.find({ regionId: parent.id });
+        }
+    },
+    Place: {
+        images(parent) {
+            return Image.find({ placeId: parent.id });
+        },
+        activities(parent) {
+            return Activity.find({ placeId: parent.id })
+        },
+        reviews(parent) {
+           return Review.find({ placeId: parent.id });
+        }
+    },
+    Review: {
+        user(parent) {
+            return User.findById(parent.userId);
         }
     },
     Mutation: {

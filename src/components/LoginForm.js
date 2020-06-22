@@ -6,6 +6,9 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import Row from 'react-bootstrap/Row'
+import Spinner from 'react-bootstrap/Spinner'
+import { withRouter } from 'react-router-dom';
 import {
   BrowserRouter as Router,
   Switch,
@@ -46,10 +49,12 @@ const LoginForm = () => {
   if ({ show }) {
     return (
       <Container maxWidth="sm">
-        <Logo src={logo} />
-        <Typography variant="h5">
-          Welcome to Omega Travel
+        <div style={{ textAlign: "center" }}>
+          <Logo src={logo} />
+          <Typography variant="h4">
+            Login
         </Typography>
+        </div>
         <br />
         <Formik
           initialValues={{ email: '', password: '' }}
@@ -63,7 +68,8 @@ const LoginForm = () => {
               },
             }).then(({ data }) => {
               if (data.login.ok) {
-                localStorage.setItem('userId', data.login.id);
+                localStorage.setItem('userId', data.login.user.id);
+                localStorage.setItem('name', data.login.user.fullname);
                 show = false;
               }
               else {
@@ -73,7 +79,6 @@ const LoginForm = () => {
             }).catch((e) => {
               setSubmitting(false);
             });
-
           }}
         >
           {({
@@ -109,12 +114,14 @@ const LoginForm = () => {
                       color="primary"
                       type="submit"
                     >
-                      
-                        LOGIN
+                      LOGIN
                     </Button>
                   </FormContainer>
                 </form>
-                {loading && <p>Cargando...</p>}
+                {loading &&
+                  <Row className="justify-content-md-center">
+                    <Spinner animation="border" />
+                  </Row>}
                 {error && <p>Error</p>}
                 {errorState && <p>{errorState}</p>}
               </div>
@@ -138,4 +145,4 @@ const FormContainer = styled.div`
   flex-direction: column;
 `;
 
-export default LoginForm;
+export default withRouter(LoginForm);
