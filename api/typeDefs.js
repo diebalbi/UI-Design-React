@@ -22,6 +22,7 @@ const typeDefs = gql`
         fullname: String!
         email: String!
         password: String!
+        token: String
     }
 
     type Continent {

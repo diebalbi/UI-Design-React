@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const jwt = require("jsonwebtoken");
+
+const JWT_SECRET = process.env.JWT_SECRET || "superJWTSecret";
 const CONNECTION_STRING = process.env.CONNECTION_STRING || `mongodb+srv://dbAdmin:dbAdmin123@web-cluster-ito1a.mongodb.net/test?retryWrites=true&w=majority`;
 
 mongoose.connect(CONNECTION_STRING, {
@@ -98,15 +101,21 @@ const resolvers = {
                 };
             }
             else {
+                const { _id, email, fullname } = user;
+                const token = jwt.sign({ _id, email, fullname }, JWT_SECRET);
+                user.token = token;
                 return {
                     ok: true,
                     user,
                 }
             }
         },
-        register: (_, { input }) => {
-            const user = new User(input);
-            return user.save();
+        register: async (_, { input }) => {
+            const user = await new User(input).save();
+            const { _id, email, fullname } = user;
+            const token = jwt.sign({ _id, email, fullname }, JWT_SECRET);
+            user.token = token;
+            return user;
         },
         registerContinent: (_, { input }) => {
             const continent = new Continent(input);
