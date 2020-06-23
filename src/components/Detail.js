@@ -101,8 +101,8 @@ const Detail = () => {
                 <Carousel>
                     {data.place.images.map(({ id, url }) => (
                         <div key={id}>
-                            <img src="https://photos.mandarinoriental.com/is/image/MandarinOriental/paris-2017-home?$MO_masthead-property-mobile$" alt="" />
-                            {/* <img src={url} /> */}
+                            {/* <img src="https://photos.mandarinoriental.com/is/image/MandarinOriental/paris-2017-home?$MO_masthead-property-mobile$" alt="" /> */}
+                            <img src={url} alt="carousel image"/>
                         </div>
                     ))}
                 </Carousel>
