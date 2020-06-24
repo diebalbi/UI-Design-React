@@ -65,23 +65,24 @@ const Region = ({ regionId, name }) => {
                         {name}
                     </Typography>
                     <br />
-                    <Switch>
+                    <div style={{ textAlign: "center" }}>
                         {data.placesByRegion.map(({ id, name, mainImageUrl }) => (
-                            <div style={{ textAlign: "center" }} key={id}>
-                                <Link to={"/place/" + id} style={{ color: '#FFF', textDecoration: 'none' }} >
-                                    <CustomCard style={{ padding: "2%" }}>
-                                        <Card>
-                                            <img src={mainImageUrl} alt="main region" />
-
-                                            <Card.Body style={{ backgroundColor: "#1976d2" }} >
-                                                <Card.Title>{name}</Card.Title>
-                                            </Card.Body>
-                                        </Card>
-                                    </CustomCard>
-                                </Link>
-                            </div>
+                            <Switch>
+                                <div style={{ display: "inline-flex" }} key={id}>
+                                    <Link to={"/place/" + id} style={{ color: '#FFF', textDecoration: 'none' }} >
+                                        <CustomCard style={{ padding: "2%" }}>
+                                            <Card>
+                                                <img src={mainImageUrl} alt="main continent" />
+                                                <Card.Body style={{ backgroundColor: "#1976d2" }} >
+                                                    <Card.Title>{name}</Card.Title>
+                                                </Card.Body>
+                                            </Card>
+                                        </CustomCard>
+                                    </Link>
+                                </div>
+                            </Switch>
                         ))}
-                    </Switch>
+                    </div>
                     <br />
                     <Divider />
                     <br />

@@ -26,7 +26,6 @@ const GET_PLACES = gql`
 
 const CustomCard = styled.div`
   object-fit: contain;
-  display: inline-flex;
   text-align: center;
   img {
     text-align: -webkit-center;
@@ -38,7 +37,6 @@ const CustomCard = styled.div`
 
 const Continent = ({ continentId, name }) => {
     const { loading, error, data } = useQuery(GET_PLACES, { variables: { continentId } });
-    console.log({data});
 
     if (loading) return (
         <Row className="justify-content-md-center">
@@ -63,23 +61,24 @@ const Continent = ({ continentId, name }) => {
                     {name}
                 </Typography>
                 <br />
-                <Switch>
+                <div style={{ textAlign: "center" }}>
                     {data.placesByContinent.map(({ id, name, mainImageUrl }) => (
-                        <div style={{ textAlign: "center" }} key={id}>
-                            <Link to={"/place/" + id} style={{ color: '#FFF', textDecoration: 'none' }} >
-                                <CustomCard style={{ padding: "2%" }}>
-                                    <Card>
-                                        <img src={mainImageUrl} alt="main continent" />
-
-                                        <Card.Body style={{ backgroundColor: "#1976d2" }} >
-                                            <Card.Title>{name}</Card.Title>
-                                        </Card.Body>
-                                    </Card>
-                                </CustomCard>
-                            </Link>
-                        </div>
+                        <Switch>
+                            <div style={{ display: "inline-flex" }} key={id}>
+                                <Link to={"/place/" + id} style={{ color: '#FFF', textDecoration: 'none' }} >
+                                    <CustomCard style={{ padding: "2%" }}>
+                                        <Card>
+                                            <img src={mainImageUrl} alt="main continent" />
+                                            <Card.Body style={{ backgroundColor: "#1976d2" }} >
+                                                <Card.Title>{name}</Card.Title>
+                                            </Card.Body>
+                                        </Card>
+                                    </CustomCard>
+                                </Link>
+                            </div>
+                        </Switch>
                     ))}
-                </Switch>
+                </div>
                 <br />
                 <Divider />
                 <br />
