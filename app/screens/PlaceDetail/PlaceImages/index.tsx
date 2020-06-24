@@ -3,7 +3,7 @@ import { Layout } from './Layout';
 import { Image } from 'react-native';
 import { useAuth } from '../../../hooks/useAuth';
 
-export const PlaceImages = ({ navigation, images }) => {
+export const PlaceImages = ({ navigation, images, placeId }) => {
     const [activeIndex, setActiveIndex] = React.useState(0);
     const {token} = useAuth();
 
@@ -13,5 +13,12 @@ export const PlaceImages = ({ navigation, images }) => {
         );
     }
 
-    return <Layout navigation={navigation} activeIndex={activeIndex} setActiveIndex={setActiveIndex} images={images} renderItem={renderItem} token={token} />
+    return <Layout 
+        placeId={placeId} 
+        navigation={navigation} 
+        activeIndex={activeIndex} 
+        setActiveIndex={setActiveIndex} 
+        images={images} 
+        renderItem={renderItem} 
+        token={token} />
 }

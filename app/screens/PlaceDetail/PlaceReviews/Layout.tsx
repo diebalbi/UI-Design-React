@@ -26,8 +26,9 @@ export const Layout = ({ navigation, placeId, reviews, token }) => (
                 data={reviews}
                 renderItem={ ({ item }) =>
                 <Card style={{marginVertical: 10}}>
-                    <Card.Title title={item.user.fullname} left={LeftContent} subtitle={CardSubtitle({rating: item.rating})} />
+                    <Card.Title title={item.user.fullname} left={LeftContent}/>
                     <Card.Content>
+                        <CardSubtitle rating={item.rating}/>
                         <Paragraph> {item.description} </Paragraph>
                     </Card.Content>
                 </Card>

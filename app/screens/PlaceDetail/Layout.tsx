@@ -4,11 +4,23 @@ import { Title, Paragraph, Divider } from 'react-native-paper';
 import { PlaceImages } from "./PlaceImages";
 import { PlaceActivities } from "./PlaceActivities";
 import { PlaceReviws } from "./PlaceReviews";
+import { Rating } from "react-native-ratings";
 
-export const Layout = ({ navigation, place }) => (
+const CardSubtitle = ({rating}) => (
+    <Rating 
+        type='custom'
+        ratingCount={5} 
+        readonly 
+        startingValue={rating} 
+        imageSize={20} 
+        ratingColor='#3498db' 
+    />
+)
+
+export const Layout = ({ navigation, place, rating }) => (
     <Container>
         <ViewPlace>
-            <PlaceImages navigation={navigation} images={place.images} />
+            <PlaceImages navigation={navigation} images={place.images} placeId={place.id} />
         </ViewPlace>
         <Divider />
         <ViewPlace>

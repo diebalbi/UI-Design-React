@@ -3,14 +3,13 @@ import { View, SafeAreaView } from "react-native";
 import { Title, Paragraph, Button, Subheading } from 'react-native-paper';
 import Carousel, { Pagination } from "react-native-snap-carousel";
 
-export const Layout = ({ navigation, renderItem, setActiveIndex, activeIndex, images, token }) => (
+export const Layout = ({ placeId, navigation, renderItem, setActiveIndex, activeIndex, images, token }) => (
     <View>
         <Title> Images </Title>
-        <SafeAreaView style={{justifyContent: "center", alignItems: "center", paddingVertical: 10}}>
         { images.length === 0 ?
             <Paragraph> There are no photos for this city yet... </Paragraph>
             :
-            <View>
+            <View style={{justifyContent: "center", alignItems: "center", paddingVertical: 10}}>
                 <Carousel 
                     layout={"default"}
                     data={images}
@@ -22,7 +21,7 @@ export const Layout = ({ navigation, renderItem, setActiveIndex, activeIndex, im
                 <Pagination
                     dotsLength={images.length}
                     activeDotIndex={activeIndex}
-                    containerStyle={{ backgroundColor: 'rgb(25, 118, 210)', padding: 5}}
+                    containerStyle={{ backgroundColor: 'rgb(25, 118, 210)', width: 300}}
                     dotStyle={{
                         width: 10,
                         height: 10,
@@ -35,12 +34,11 @@ export const Layout = ({ navigation, renderItem, setActiveIndex, activeIndex, im
                 />
             </View>
         }
-        </SafeAreaView>
         { token ? 
             <Button 
                 mode="contained" 
                 style={{backgroundColor: "rgb(25, 118, 210)", marginHorizontal: 10}} 
-                onPress={() => navigation.push("UploadImage")} >
+                onPress={() => navigation.push("UploadImage", {placeId: placeId})} >
                 Add Image
             </Button>
             :

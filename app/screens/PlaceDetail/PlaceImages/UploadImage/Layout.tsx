@@ -1,40 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, TouchableOpacity, SafeAreaView, StyleSheet, Modal, Image } from 'react-native';
+import React from 'react';
+import { Text, View, TouchableOpacity, SafeAreaView, StyleSheet, Modal, Image, ActivityIndicator } from 'react-native';
 import { Camera } from 'expo-camera';
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { Button } from 'react-native-paper';
 
-export const Layout = () => {
-  const camRef = useRef(null);
-  const [permission, setPermission] = useState('');
-  const [hasPermission, setHasPermission] = useState(false);
-  const [type, setType] = useState(Camera.Constants.Type.back);
-  const [capturedPhoto, setCapturedPhoto] = useState(null);
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setPermission(status);
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
-
+export const Layout = ({loading, permission, hasPermission, type, setType, camRef, takePicture, capturedPhoto, open, setOpen, saveHandler}) => {
 
   if (permission === '') {
     return <View />;
   }
   if (!hasPermission) {
     return <Text>No access to camera</Text>;
-  }
-
-  const takePicture = async () => {
-    if(camRef) {
-      const data = await camRef.current.takePictureAsync();
-      setCapturedPhoto(data.uri);
-      setOpen(true);
-    }
   }
 
   return (
@@ -76,23 +53,22 @@ export const Layout = () => {
           visible={open}
         >
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', margin: 20}}> 
-            <TouchableOpacity style={{margin: 10}} onPress={ () => setOpen(false) }>
+            <TouchableOpacity style={{margin: 10}} onPress={ () => setOpen(false) } disabled={loading}>
               <FontAwesome name="window-close" size={50} color="lightcoral" />
             </TouchableOpacity>
 
-            <Image style={{width: '100%', height: '80%', borderRadius: 20}} source={{uri: capturedPhoto}} />
+            <Image style={{width: '100%', height: '80%', borderRadius: 20}} source={{uri: capturedPhoto.uri}} />
           </View>
+          <ActivityIndicator size="large" color="rgb(25, 118, 210)" animating={loading} />
           <Button 
+            disabled={loading}
             mode="contained" 
             style={{backgroundColor: "rgb(25, 118, 210)", marginVertical: 10}} 
-            onPress={() => console.log(capturedPhoto)} >
+            onPress={saveHandler} >
             Save Image
           </Button>
         </Modal>
       }
-          
-            
-
     </SafeAreaView>
   );
 }
