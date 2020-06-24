@@ -33,6 +33,7 @@ const CustomCard = styled.div`
     text-align: -webkit-center;
     float: left;
     width: 100%;
+    max-width: 300px;
   }
 `;
 

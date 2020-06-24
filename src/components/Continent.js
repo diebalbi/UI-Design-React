@@ -32,11 +32,13 @@ const CustomCard = styled.div`
     text-align: -webkit-center;
     float: left;
     width: 100%;
+    max-width: 300px;
   }
 `;
 
 const Continent = ({ continentId, name }) => {
     const { loading, error, data } = useQuery(GET_PLACES, { variables: { continentId } });
+    console.log({data});
 
     if (loading) return (
         <Row className="justify-content-md-center">
@@ -68,7 +70,7 @@ const Continent = ({ continentId, name }) => {
                                 <CustomCard style={{ padding: "2%" }}>
                                     <Card>
                                         <img src={mainImageUrl} alt="main continent" />
-                                        
+
                                         <Card.Body style={{ backgroundColor: "#1976d2" }} >
                                             <Card.Title>{name}</Card.Title>
                                         </Card.Body>
