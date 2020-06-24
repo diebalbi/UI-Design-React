@@ -1,21 +1,31 @@
-## Costas que Faltan:
+## URL (ACTUALIZAR)
 
-1) No pudimos arreglar Routing y por ende no podemos entrar al detalle de una ciudad en específico.
-Por otro lado si existen los distintos componentes pero utilizando texto "lorem ipsum".
+Web: https://ui-design-react-823qjzp9m.now.sh
 
-2) La WebApi quedó lista, todos los endpoints estan prontos pero no llegamos a consumir los recursos.
+Mobile: 
 
-## URL
-
-https://ui-design-react-823qjzp9m.now.sh
-
-## Principales decisiones de diseño
+## Principales decisiones de diseño (ACTUALIZAR)
 
 Nos basamos en los estilos limpios y sencillos que encontramos en paginas del estilo como Airbnb, Booking y Qatar Airways pero también en otras paginas que nos resultaron agradables a la vista como mongodb y react, donde no utilizan muchos colores, sino que tienen generalmente 1 color principal y luego juegan con tonos de grises y el color blanco.
 
 También lo que notamos en estas paginas de viajes, es que todas usan imagenes grandes o medianamente grades con poco texto, y toda la información te la brindan al ingresar en cada una de ellas por lo cual seguimos esa idea para el diseño de nuestro proyecto.
 
-## Jerarquía de componentes
+Por otro lado, decidimos no utilizar librerias que nos brindaran una Gallery la cual sería utilizada en el home sino que optamos por utilizar Cards y poder ajustarlo a lo que creemos ser una buena solución y fácil de extender si necesario.
+
+(ACTUALIZAR)
+Justificaciones sobre funcionalidad 'Crear viaje':
+
+(ACTUALIZAR)
+Justificaciones sobre funcionalidad 'Compartir una foto':
+
+(ACTUALIZAR)
+Justificaciones sobre funcionalidad 'Listado de lugares por distancia':
+
+(ACTUALIZAR)
+Justificaciones sobre funcionalidad Crear viaje:
+
+## Jerarquía de componentes: (ACTUALIZAR)
+### Web:
 
 - Header
   - LoginForm
@@ -32,17 +42,22 @@ También lo que notamos en estas paginas de viajes, es que todas usan imagenes g
   
 - Footer
 
-## Instrucciones nuevo ambiente
+### Mobile:
 
+## Instrucciones (ACTUALIZAR)
+### Web:
 - Clonar el repositorio 
 - Correr comando `yarn install`
 - Correr comando `yarn start`
+
+### Mobile:
+Una URL de acceso público para correr la aplicación nativa de Expo, o bien, una guía detallada de cómo instalar la aplicación nativa en un simulador Android o iOS a partir del repositorio recién clonado.Una URL de acceso público para correr la aplicación nativa de Expo, o bien, una guía detallada de cómo instalar la aplicación nativa en un simulador Android o iOS a partir del repositorio recién clonado.Una URL de acceso público para correr la aplicación nativa de Expo, o bien, una guía detallada de cómo instalar la aplicación nativa en un simulador Android o iOS a partir del repositorio recién clonado.Una URL de acceso público para correr la aplicación nativa de Expo, o bien, una guía detallada de cómo instalar la aplicación nativa en un simulador Android o iOS a partir del repositorio recién clonado.
 
 ### Para deployment en Versel
 
 - Modificar web/apollo.js e indicar la nueva URL
 
-## Dependencies
+## Dependencias (ACTUALIZAR)
 
 ### [Material UI](https://material-ui.com/)
 - npm install @material-ui/core
@@ -89,7 +104,7 @@ También lo que notamos en estas paginas de viajes, es que todas usan imagenes g
 - agregar reseña
 	- debe estar logueado
 
-## Schema Graphql
+## Schema Graphql (ACTUALIZAR)
 
 ```
 const { gql } = require("apollo-server-micro");
