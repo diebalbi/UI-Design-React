@@ -8,19 +8,14 @@ import { MaterialIcons, Fontisto } from '@expo/vector-icons';
 import client from "./client";
 import { ContinentStack } from "./screens/Continent/StackNavigator";
 import { RegionStack } from "./screens/Region/StackNavigator";
+import { useAuth } from "./hooks/useAuth";
 
 const Tab = createBottomTabNavigator();
-
-export const AuthContext = React.createContext({
-  token: "",
-  setToken: (x: string) => {
-    console.log("X", x);
-  },
-});
 
 export default function App() {
   const [isReady, setReady] = React.useState(false);
   const [token, setToken] = React.useState<string>("");
+  const {AuthContext} = useAuth();
 
   React.useEffect(() => {
     AsyncStorage.getItem("token")
