@@ -5,6 +5,10 @@ const typeDefs = gql`
         user(id: ID!): User
         users: [User]
         
+        trip(id: ID!): Trip
+        trips(userId: ID!): [Trip]
+        tripsPlaces(tripId: ID!): [TripPlace]
+
         continents: [Continent]
         regions: [Region]
         region(id: ID!): Region
@@ -16,6 +20,20 @@ const typeDefs = gql`
         images(placeId: ID!): [Image]
         image(placeId: ID!): Image
         reviews(placeId: ID!): [Review]
+    }
+
+    type Trip {
+        id: ID
+        name: String!
+        userId: ID!
+        tripPlaces: [TripPlace]
+    }
+
+    type TripPlace {
+        id: ID
+        tripId: ID!
+        placeId: ID!
+        place: Place
     }
 
     type User {
@@ -78,6 +96,18 @@ const typeDefs = gql`
         error: String
     }
 
+    type TripResponse {
+        trip: Trip
+        ok: Boolean!
+        error: String
+    }
+
+    type TripPlaceResponse {
+        tripPlace: TripPlace
+        ok: Boolean!
+        error: String
+    }
+
     type Mutation {
         login(input: LoginInput!): LoginResponse
         register(input: RegisterInput!): User!
@@ -87,6 +117,18 @@ const typeDefs = gql`
         registerActivity(input: RegisterActivity!): Activity!
         registerImage(input: RegisterImage!): Image!
         registerReview(input: RegisterReview!): Review!
+        registerTrip(input: RegisterTrip!): TripResponse!
+        registerTripPlace(input: RegisterTripPlace!): TripPlaceResponse!
+    }
+
+    input RegisterTripPlace {
+        tripId: ID!
+        placeId: ID!
+    }
+
+    input RegisterTrip {
+        name: String!
+        userId: ID!
     }
 
     input LoginInput {

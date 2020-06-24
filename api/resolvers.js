@@ -15,6 +15,16 @@ const User = mongoose.model("User", {
     password: String
 });
 
+const Trip = mongoose.model("Trip", {
+    name: String,
+    userId: String
+})
+
+const TripPlace = mongoose.model("TripPlace", {
+    tripId: String,
+    placeId: String
+})
+
 const Review = mongoose.model("Review", {
     userId: String,
     placeId: String,
@@ -49,7 +59,6 @@ const Image = mongoose.model("Image", {
     url: String
 });
 
-    
 const resolvers = {
     Query: {
         placesByContinent: (_, args) => {
@@ -78,6 +87,15 @@ const resolvers = {
         },
         reviews: (_, args, context, info) => {
             return Review.find({ placeId: args.placeId });
+        },
+        trip: (_, args, context, info) => {
+            return Trip.findById(args.id);
+        },
+        trips: (_, args, context, info) => {
+            return Trip.find({ placeId: args.placeId });
+        },
+        tripsPlaces: (_, args, context, info) => {
+            return TripPlace.find({ tripId: args.tripId });
         },
         users: () => User.find(),
         continents: () => Continent.find(),
@@ -109,6 +127,16 @@ const resolvers = {
             return User.findById(parent.userId);
         }
     },
+    Trip: {
+        tripPlaces(parent) {
+            return TripPlace.find({ tripId: parent.id });
+        }
+    },
+    TripPlace: {
+        place(parent) {
+            return Place.findById(parent.placeId);
+        }
+    },
     Mutation: {
         login: async (_, { input }) => { 
             const user = await User.findOne({
@@ -138,6 +166,38 @@ const resolvers = {
             user.token = token;
             return user;
         },
+        registerTrip: async (_, { input }) => {
+            let trip = await Trip.findOne({ name: input.name, userId: input.userId });
+            if (trip === null) {
+                trip = await new Trip(input).save();
+                return {
+                    ok: true,
+                    trip
+                }
+            }
+            else {
+                return {
+                    ok: false,
+                    error: "Trip with that name already existe"
+                };
+            }
+        },
+        registerTripPlace: async (_, { input }) => {
+            let tripPlace = await TripPlace.findOne({ tripId: input.tripId, placeId: input.placeId })
+            if (tripPlace === null) {
+                tripPlace = await new TripPlace(input).save();
+                return {
+                    ok: true,
+                    tripPlace
+                }
+            }
+            else {
+                return {
+                    ok: false,
+                    error: "Place already exist in this trip"
+                };
+            }
+        }, 
         registerContinent: (_, { input }) => {
             const continent = new Continent(input);
             return continent.save();
