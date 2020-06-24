@@ -1,25 +1,35 @@
 import * as React from "react";
-import { useNavigation } from "@react-navigation/native";
-import { Layout } from './layout';
+import { Layout } from './Layout';
 import { useLogin } from "./hooks/useLogin";
 import { useAuth } from "../../hooks/useAuth";
+import { useSetNavigationOptions } from "../../hooks/useSetNavigationOptions";
+import { useAlert } from "../../hooks/useAlert";
 
-export const Login = () => {
-    const navigation = useNavigation();
-    const { state, handleChange, handleSubmit } = useLogin();
-    const { setToken } = useAuth();
+export const Login = ({ navigation }) => {
+  const [loading, setLoading] = React.useState(false);
+  const { state, handleChange, handleSubmit } = useLogin();
+  const { token, setToken } = useAuth();
+  useSetNavigationOptions("Login", false);
 
-    const handlePressSubmit = async () => {
-      try {
-          const user = await handleSubmit();
-          console.log("Handle Submit", user);
-          setToken(user?.token);
-          // navigation.replace("Home", { user });
-      } 
-      catch (error) {
-          console.log("error", error);
+  const handlePressSubmit = async () => {
+    try {
+      setLoading(true);
+
+      const data = await handleSubmit();
+      if (data.login.ok) {
+          setToken(data.login.user?.id);
+          navigation.goBack();
       }
-  };
+      else {
+          useAlert({titleError: data.login.error, errorMessage: "Password or username incorrect"});
+      }
 
-  return <Layout state={state} handleChange={handleChange} navigation={navigation} handlePressSubmit={handlePressSubmit} />;
+      setLoading(false);
+    } 
+    catch (error) {
+      useAlert({titleError: "Oh snap! You got an error!", errorMessage: error});
+    }
+  };
+  
+  return <Layout loading={loading} state={state} handleChange={handleChange} navigation={navigation} handlePressSubmit={handlePressSubmit} />;
 }

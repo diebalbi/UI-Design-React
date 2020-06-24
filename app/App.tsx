@@ -1,17 +1,15 @@
 import React from "react";
-import { StyleSheet, AsyncStorage } from "react-native";
+import { AsyncStorage } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ApolloProvider } from "@apollo/react-hooks";
-import { Login } from "./screens/Login";
-import { Register } from "./screens/Register";
-import { Home } from "./screens/Home";
+import { MaterialIcons, Fontisto } from '@expo/vector-icons'; 
 import client from "./client";
-import { PlaceDetail } from "./screens/PlaceDetail";
-import { Place } from "./screens/Place";
+import { ContinentStack } from "./screens/Continent/StackNavigator";
+import { RegionStack } from "./screens/Region/StackNavigator";
 
-const RootStack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export const AuthContext = React.createContext({
   token: "",
@@ -42,8 +40,7 @@ export default function App() {
   }, [token]);
 
   if (!isReady) return null;
-  
-  //const initialRouteName = token ? "Home" : "Login";
+
   return (
     <AuthContext.Provider
       value={{
@@ -56,38 +53,23 @@ export default function App() {
       <ApolloProvider client={client}>
         <PaperProvider>
           <NavigationContainer>
-            <RootStack.Navigator initialRouteName={"Home"}>
-              {/* {!token ? (
-                <>
-                  <RootStack.Screen 
-                    name="Login" 
-                    component={Login} 
-                  />
-                  <RootStack.Screen
-                    name="Register"
-                    component={Register}
-                  />
-                </>
-              ) : ( */}
-                <>
-                  <RootStack.Screen name="Home" component={Home} />
-                  <RootStack.Screen name="PlaceDetail" component={PlaceDetail} />
-                  <RootStack.Screen name="Place" component={Place} />
-                </>
-              {/* )} */}
-            </RootStack.Navigator>
+            <Tab.Navigator
+              screenOptions={({ route }) => ({
+                tabBarIcon: ({ color, size }) => {
+                  if (route.name === 'Continent') {
+                    return <Fontisto name="world-o" size={size} color={color} />
+                  } else {
+                    return <MaterialIcons name="place" size={size} color={color} />;
+                  }
+                },
+              })}
+            >
+              <Tab.Screen name="Continent" component={ContinentStack} />
+              <Tab.Screen name="Region" component={RegionStack} />
+            </Tab.Navigator>
           </NavigationContainer>
         </PaperProvider>
       </ApolloProvider>
     </AuthContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

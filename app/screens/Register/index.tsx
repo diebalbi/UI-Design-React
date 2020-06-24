@@ -1,20 +1,19 @@
 import * as React from "react";
-import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../hooks/useAuth";
 import { useRegister } from "./hooks/useRegister";
 import { Layout } from "./Layout";
+import { useSetNavigationOptions } from "../../hooks/useSetNavigationOptions";
 
-export const Register = () => {
-    const navigation = useNavigation();
+export const Register = ({ navigation }) => {
     const { state, handleChange, handleSubmit } = useRegister();
     const { setToken } = useAuth();
+    useSetNavigationOptions("Register", false);
 
     const handlePressSubmit = async () => {
         try {
-            const user = await handleSubmit();
-            console.log("Handle Submit", user);
-            setToken(user?.token);
-            // navigation.replace("Home", { user });
+            const data = await handleSubmit();
+            setToken(data.register?.id);
+            navigation.popToTop();
         } 
         catch (error) {
             console.log("error", error);

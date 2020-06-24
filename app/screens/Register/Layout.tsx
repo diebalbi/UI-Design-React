@@ -1,10 +1,13 @@
 import * as React from "react";
 import styled from "styled-components/native";
 import { TextInput, Button, Title } from "react-native-paper";
+import logo from '../../assets/logo.png';
 
 export const Layout = ({ state, handleChange, handlePressSubmit }) => (
   <Container>
-    {/* <Logo source={logo} /> */}
+    <LogoContaier>
+        <Logo source={logo} resizeMode={"contain"} />
+    </LogoContaier>
     <Title>Welcome to our platform, please register!</Title>
     <FormContainer>
       <TextInput
@@ -26,26 +29,30 @@ export const Layout = ({ state, handleChange, handlePressSubmit }) => (
         value={state.password}
         onChangeText={(text) => handleChange("password")(text)}
       />
-      <Button mode="contained" onPress={handlePressSubmit}>
+      <Button mode="contained" style={{backgroundColor: "rgb(25, 118, 210)"}} onPress={handlePressSubmit}>
         REGISTER
       </Button>
     </FormContainer>
   </Container>
 )
 
+const FormContainer = styled.View`
+    flex: 2;
+`;
+
 const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  padding: 0px 20px;
+    flex: 1;
+    justify-content: center;
+    padding: 0px 20px;
 `;
 
 const Logo = styled.Image`
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
+  width: 200px;
+  height: 200px;
 `;
 
-const FormContainer = styled.View`
-  display: flex;
-  flex-direction: column;
+const LogoContaier = styled.View`
+    flex: 1;
+    align-items: center;
+    justify-content: center;
 `;

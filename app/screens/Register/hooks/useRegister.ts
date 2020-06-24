@@ -23,10 +23,7 @@ export const useRegister = () => {
         variables: {
           input: values,
         },
-      }).then(async ({data}) => {
-        console.log("Data", { data });
-        const token = data.register.token;
-        await AsyncStorage.setItem("token", token);
+      }).then(({data}) => {
         return data;
       });
     },

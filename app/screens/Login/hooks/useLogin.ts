@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { AsyncStorage } from 'react-native';
@@ -24,17 +23,11 @@ export const useLogin = () => {
     const [login] = useMutation(LOGIN_MUTATION);
     const { state, handleChange, handleSubmit } = useForm({
       onSubmit: ({ ...values }) => {
-        console.log("LOGIN", values);
         return login({
           variables: {
             input: values
           },
-        }).then(async ({ data }) => {
-          if (data.login.ok) {
-            console.log("Data", { data });
-            const token = data.register.token;
-            await AsyncStorage.setItem("token", token);
-          }
+        }).then(({ data }) => {
           return data;
         });
       },
