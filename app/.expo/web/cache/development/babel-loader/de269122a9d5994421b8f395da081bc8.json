@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var Trip = function Trip() {};","map":{"version":3,"sources":["C:/Users/Fido/Documents/GitHub/UI-Design-React/app/screens/Trip/index.tsx"],"names":["Trip"],"mappings":"AAEA,OAAO,IAAMA,IAAI,GAAG,SAAPA,IAAO,GAAM,CAEzB,CAFM","sourcesContent":["import React from 'react';\r\n\r\nexport const Trip = () => {\r\n\r\n}"]},"metadata":{},"sourceType":"module"}

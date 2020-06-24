@@ -8,14 +8,20 @@ import { MaterialIcons, Fontisto } from '@expo/vector-icons';
 import client from "./client";
 import { ContinentStack } from "./screens/Continent/StackNavigator";
 import { RegionStack } from "./screens/Region/StackNavigator";
-import { useAuth } from "./hooks/useAuth";
+import { TripStack } from "./screens/Trip/StackNavigator";
 
 const Tab = createBottomTabNavigator();
+
+export const AuthContext = React.createContext({
+  token: "",
+  setToken: (x: string) => {
+    console.log("X", x);
+  },
+});
 
 export default function App() {
   const [isReady, setReady] = React.useState(false);
   const [token, setToken] = React.useState<string>("");
-  const {AuthContext} = useAuth();
 
   React.useEffect(() => {
     AsyncStorage.getItem("token")
@@ -53,14 +59,17 @@ export default function App() {
                 tabBarIcon: ({ color, size }) => {
                   if (route.name === 'Continent') {
                     return <Fontisto name="world-o" size={size} color={color} />
-                  } else {
+                  } else if (route.name === 'Region') {
                     return <MaterialIcons name="place" size={size} color={color} />;
+                  } else {
+                    return <Fontisto name="plane" size={size} color={color}/>
                   }
                 },
               })}
             >
               <Tab.Screen name="Continent" component={ContinentStack} />
               <Tab.Screen name="Region" component={RegionStack} />
+              <Tab.Screen name="Trip" component={TripStack} />
             </Tab.Navigator>
           </NavigationContainer>
         </PaperProvider>
