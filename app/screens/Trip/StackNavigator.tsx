@@ -8,6 +8,7 @@ import { AddReview } from "../PlaceDetail/PlaceReviews/AddReview";
 import { UploadImage } from "../PlaceDetail/PlaceImages/UploadImage";
 import { TripDetail } from "../TripDetail";
 import { NewTrip } from "../NewTrip";
+import { Error } from "../Error";
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ export const TripStack = () => {
             <Stack.Screen name="UploadImage" component={UploadImage} />
             <Stack.Screen name="TripDetail" component={TripDetail} />
             <Stack.Screen name="NewTrip" component={NewTrip} />
+            <Stack.Screen name="Error" component={Error} />
         </Stack.Navigator>
     )
 }

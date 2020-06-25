@@ -7,6 +7,7 @@ import { Register } from "../Register";
 import { AddReview } from "../PlaceDetail/PlaceReviews/AddReview";
 import { UploadImage } from "../PlaceDetail/PlaceImages/UploadImage";
 import { Trip } from "../Trip";
+import { Error } from "../Error";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ export const RegionStack = () => {
             <Stack.Screen name="AddReview" component={AddReview} />
             <Stack.Screen name="UploadImage" component={UploadImage} />
             <Stack.Screen name="Trip" component={Trip} />
+            <Stack.Screen name="Error" component={Error} />
         </Stack.Navigator>
     )
 }

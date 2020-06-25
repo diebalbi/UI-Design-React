@@ -11,7 +11,6 @@ export const useReview = ({ placeId, userId }) => {
     });
     const { state, handleChange, handleSubmit } = useForm({
       onSubmit: ({ ...values }) => {
-        console.log("Valores", values);
         return addReview({
             variables: {
                 input: values

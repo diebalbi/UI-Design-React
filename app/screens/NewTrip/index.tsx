@@ -15,9 +15,7 @@ export const NewTrip = ({ navigation }) => {
         setLoading(true);
 
         const data = await handleSubmit();
-
-        console.log("Data", data);
-        
+     
         if(data.registerTrip.ok) {
             navigation.goBack();
         }

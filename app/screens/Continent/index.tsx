@@ -8,12 +8,12 @@ import { GET_CONTINENTS } from "../../utility/querys/getContinent";
 export const Continent = ({ navigation }) => {
   const { loading, error, data } = useQuery(GET_CONTINENTS);
   useSetNavigationOptions("Continent", true);
-  
+
   if( loading ) {
     return <Loading />
   } 
   else if ( error ) {
-    console.log(error);
+    navigation.push("Error", {error: error});
   }
   else {
     return <Layout navigation={navigation} continents={data.continents}/>

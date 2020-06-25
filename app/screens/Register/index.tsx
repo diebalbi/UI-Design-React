@@ -16,7 +16,7 @@ export const Register = ({ navigation }) => {
             navigation.popToTop();
         } 
         catch (error) {
-            console.log("error", error);
+            navigation.push("Error", {error: error});
         }
     };
     return <Layout state={state} handleChange={handleChange} handlePressSubmit={handlePressSubmit} />

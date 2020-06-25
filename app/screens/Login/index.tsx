@@ -27,7 +27,7 @@ export const Login = ({ navigation }) => {
       setLoading(false);
     } 
     catch (error) {
-      useAlert({titleError: "Oh snap! You got an error!", errorMessage: error});
+        navigation.push("Error", {error: error});
     }
   };
   

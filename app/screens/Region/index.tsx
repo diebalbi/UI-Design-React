@@ -14,7 +14,7 @@ export const Region = ({ navigation }) => {
     return <Loading />
   } 
   else if ( error ) {
-    console.log(error);
+      navigation.push("Error", {error: error});
   }
   else {
     return <Layout navigation={navigation} regions={data.regions}/>

@@ -34,7 +34,7 @@ export const PlaceDetail = ({ navigation }) => {
         return <Loading />
     } 
     else if ( error ) {
-        console.log(error);
+        navigation.push("Error", {error: error});
     }
     else {
         let rating = 0;

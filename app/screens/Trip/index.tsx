@@ -45,7 +45,6 @@ export const Trip = ({ navigation }) => {
                 return data.registerTripPlace;
             });
             
-            console.log(result);
             setLoadingData(false);
             if (result.ok) {
                 navigation.goBack();
@@ -60,7 +59,7 @@ export const Trip = ({ navigation }) => {
         return <Loading />
     }
     else if ( error ) {
-        useAlert({titleError: "Oh snap! You got an error!", errorMessage: error});
+        navigation.push("Error", {error: error});
     }
     else {
         return <Layout navigation={navigation} loadingData={loadingData} comeFromRoute={comeFromRoute} handlePress={handlePress} token={token} data={data} />
