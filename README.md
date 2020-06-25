@@ -1,4 +1,4 @@
-## URL (ACTUALIZAR)
+## URL
 
 Web: https://ui-design-react-823qjzp9m.now.sh
 
