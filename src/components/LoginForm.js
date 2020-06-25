@@ -71,6 +71,7 @@ const LoginForm = () => {
                 localStorage.setItem('userId', data.login.user.id);
                 localStorage.setItem('name', data.login.user.fullname);
                 show = false;
+                window.history.back();
               }
               else {
                 setErrorState(data.login.error);

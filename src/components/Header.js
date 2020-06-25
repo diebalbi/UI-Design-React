@@ -109,6 +109,12 @@ export default function ButtonAppBar() {
                             </Link>
                             : ''
                         }
+                        {userId != '' ?
+                            <Link to="/trips" style={{ color: '#FFF' }} >
+                                <Button color="inherit">My Trips</Button>
+                            </Link>
+                            : ''
+                        }
                         {userId == '' ?
                             <Link to="/register" style={{ color: '#FFF' }} >
                                 <Button color="inherit">Register</Button>

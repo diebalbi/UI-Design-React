@@ -61,14 +61,12 @@ const RegisterForm = () => {
         validationSchema={validations}
         onSubmit={({ repeatPassword, ...values }, { setSubmitting }) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-
             register({
               variables: {
                 input: values
               },
             }).then((result) => {
-              console.log("Result", { result });
+              window.history.back();
             });
 
             setSubmitting(false);
@@ -117,7 +115,7 @@ const RegisterForm = () => {
                   variant="filled"
                   id="repeatPassword"
                   label="Repeat password"
-                  type="repeatPassword"
+                  type="password"
                   value={values.repeatPassword}
                   onChange={handleChange("repeatPassword")}
                 />

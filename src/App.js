@@ -9,6 +9,9 @@ import Detail from "./components/Detail";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import Welcome from "./components/Welcome";
+import Trips from "./components/Trips";
+import Trip from "./components/Trip";
+import PlaceToTrip from "./components/PlaceToTrip";
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,6 +28,13 @@ function App() {
         <Route path="/" component={Header} />
         <Route path="/" component={Welcome} />
         <Switch>
+          <Route exact path="/trips" component={Trips} />
+          <Route exact path="/trips/:tripId">
+            <Trip />
+          </Route>
+          <Route exact path="/trips/add/:placeId">
+            <PlaceToTrip />
+          </Route>
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
           <Route path="/place/:placeId">

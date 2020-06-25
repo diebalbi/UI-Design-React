@@ -18,7 +18,6 @@ export const useRegister = () => {
   const [register] = useMutation(REGISTER_MUTATION);
   const { state, handleChange, handleSubmit } = useForm({
     onSubmit: ({ repeatPassword, ...values }) => {
-      console.log("REGISTER", values);
       return register({
         variables: {
           input: values,

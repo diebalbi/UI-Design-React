@@ -13,8 +13,10 @@ import { useQuery } from '@apollo/react-hooks';
 import Spinner from 'react-bootstrap/Spinner'
 import Row from 'react-bootstrap/Row'
 import { Alert } from '@material-ui/lab';
+import { BookmarkPlus } from 'react-bootstrap-icons';
 
 import {
+    Switch,
     Link,
     useParams
 } from "react-router-dom";
@@ -92,7 +94,12 @@ const Detail = () => {
             <Container maxWidth="md">
                 <br />
                 <Typography variant="h3">
-                    {data.place.name}
+                    {data.place.name + " "}
+                    <Switch>
+                        <Link to={"/trips/add/" + placeId} style={{ color: 'black', textDecoration: 'none' }} >
+                            <BookmarkPlus size={30} />
+                        </Link>
+                    </Switch>
                 </Typography>
                 <div className={classes.root}>
                     <Rating name="size-small" defaultValue={getStars({ data })} readOnly />
@@ -101,8 +108,7 @@ const Detail = () => {
                 <Carousel>
                     {data.place.images.map(({ id, url }) => (
                         <div key={id}>
-                            {/* <img src="https://photos.mandarinoriental.com/is/image/MandarinOriental/paris-2017-home?$MO_masthead-property-mobile$" alt="" /> */}
-                            <img src={url} alt="carousel image"/>
+                            <img src={url} alt="carousel image" />
                         </div>
                     ))}
                 </Carousel>
