@@ -1,5 +1,5 @@
 import React from "react";
-import { View, SafeAreaView } from "react-native";
+import { View } from "react-native";
 import { Title, Paragraph, Button, Subheading } from 'react-native-paper';
 import Carousel, { Pagination } from "react-native-snap-carousel";
 
@@ -42,7 +42,7 @@ export const Layout = ({ placeId, navigation, renderItem, setActiveIndex, active
                 Add Image
             </Button>
             :
-            <Subheading style={{textAlign: "center", fontWeight: "bold"}}> Sign in to upload a Image! </Subheading>
+            <Subheading style={{textAlign: "center", fontWeight: "bold"}}> Login to upload a Image! </Subheading>
         }
     </View>
 );

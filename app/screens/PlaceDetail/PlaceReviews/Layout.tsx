@@ -45,7 +45,7 @@ export const Layout = ({ navigation, placeId, reviews, token }) => (
                 Add Review
             </Button>
             :
-            <Subheading style={{textAlign: "center", fontWeight: "bold"}}> Sign in to send your review too! </Subheading>
+            <Subheading style={{textAlign: "center", fontWeight: "bold"}}> Login to send your review too! </Subheading>
         }
     </View>
 )
