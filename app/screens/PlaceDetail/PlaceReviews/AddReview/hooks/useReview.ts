@@ -1,22 +1,14 @@
 import { useMutation } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
 import { useForm } from '../../../../../hooks/useForm';
-
-const REVIEW_MUTATION = gql`
-    mutation Review($input: RegisterReview!)  {
-        registerReview(input: $input)
-        {
-            id,
-            description,
-            rating,
-            placeId,
-            userId
-        }
-    }
-`;
+import { GET_PLACE } from "../../../../../utility/querys/getPlace";
+import { REVIEW_MUTATION } from "../../../../../utility/mutations/addReview";
 
 export const useReview = ({ placeId, userId }) => {
-    const [addReview] = useMutation(REVIEW_MUTATION);
+    const [addReview] = useMutation(REVIEW_MUTATION, {
+      refetchQueries: [
+        {query: GET_PLACE, variables: {placeId} }
+      ]
+    });
     const { state, handleChange, handleSubmit } = useForm({
       onSubmit: ({ ...values }) => {
         console.log("Valores", values);

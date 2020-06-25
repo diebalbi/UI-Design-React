@@ -2,22 +2,8 @@ import React from "react";
 import { Layout } from "./Layout";
 import { useSetNavigationOptions } from "../../hooks/useSetNavigationOptions";
 import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
 import { Loading } from "../Loading";
-
-const GET_REGIONS = gql`
-  {
-    regions {
-      id,
-      name,
-      places {
-        id,
-        name,
-        mainImageUrl
-      }
-    }
-  }`
-;
+import { GET_REGIONS } from "../../utility/querys/getRegion";
 
 export const Region = ({ navigation }) => {
   const { loading, error, data } = useQuery(GET_REGIONS);

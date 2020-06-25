@@ -10,7 +10,7 @@ export const Layout = ({ navigation, tripsPlaces }) => (
         <FlatList
             data={tripsPlaces}
             renderItem={ ({ item }) =>
-                <Place placeId={item.place.id} name={item.place.name} mainImageUrl={item.place.mainImageUrl} navigation={navigation} />
+                <Place favorite={false} placeId={item.place.id} name={item.place.name} mainImageUrl={item.place.mainImageUrl} navigation={navigation} />
             }
             keyExtractor={item => item.id}
         />

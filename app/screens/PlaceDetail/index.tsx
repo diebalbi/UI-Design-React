@@ -4,45 +4,16 @@ import { useRoute } from "@react-navigation/native";
 import { useSetNavigationOptions } from "../../hooks/useSetNavigationOptions";
 import { Loading } from "../Loading";
 import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
 import { useAuth } from "../../hooks/useAuth";
 import { useAlert } from "../../hooks/useAlert";
-
-const GET_PLACE = gql`
-    query getPlace($placeId: ID!) {
-        place(id: $placeId) {
-            id,
-            name,
-            description,
-            continentId,
-            regionId,
-            images {
-                id,
-                url
-            },
-            activities {
-                id,
-                price,
-                name
-            },
-            reviews {
-                id,
-                description,
-                rating,
-                user{
-                id,
-                fullname
-                }
-            }
-        }
-    }
-`
+import { GET_PLACE } from "../../utility/querys/getPlace";
 
 export const PlaceDetail = ({ navigation }) => {
     const { token } = useAuth();
     const route:any = useRoute();
     const placeId = route.params.id;
     const title = route.params.name;
+    const favorite = route.params.favorite;
     useSetNavigationOptions(title, true);
 
     const { loading, error, data } = useQuery(GET_PLACE,
@@ -66,10 +37,10 @@ export const PlaceDetail = ({ navigation }) => {
         console.log(error);
     }
     else {
-        let rating = 2;
+        let rating = 0;
         data.place.reviews.map( review => {
             rating += review.rating;
         });
-        return <Layout handlePress={handlePress} navigation={navigation} place={data.place} rating={rating}/>;
+        return <Layout favorite={favorite} handlePress={handlePress} navigation={navigation} place={data.place} rating={rating}/>;
     }
 }

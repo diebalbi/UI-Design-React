@@ -1,24 +1,14 @@
 import { useMutation } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
 import { useForm } from '../../../hooks/useForm';
-
-const TRIP_MUTATION = gql`
-    mutation RegisterTrip($input: RegisterTrip!) {
-        registerTrip(input: $input)
-        {
-            ok,
-            error,
-            trip {
-                id,
-                name,
-                userId
-            }
-        }
-    }
-`;
+import { GET_TRIPS } from "../../../utility/querys/getTrips";
+import { TRIP_MUTATION } from "../../../utility/mutations/addTrip";
 
 export const useTrip = ({ userId }) => {
-    const [newTrip] = useMutation(TRIP_MUTATION);
+    const [newTrip] = useMutation(TRIP_MUTATION, {
+      refetchQueries: [
+        {query: GET_TRIPS, variables: { userId } }
+      ]
+    });
     const { state, handleChange, handleSubmit } = useForm({
       onSubmit: ({ ...values }) => {
         return newTrip({

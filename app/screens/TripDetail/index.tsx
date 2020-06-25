@@ -2,26 +2,11 @@ import React from 'react';
 import { Layout } from './Layout';
 import { useQuery } from '@apollo/react-hooks';
 import { useRoute } from '@react-navigation/native';
-import { gql } from 'apollo-boost';
 import { useAlert } from '../../hooks/useAlert';
 import { Loading } from '../Loading';
 import { useSetNavigationOptions } from '../../hooks/useSetNavigationOptions';
 import { useAuth } from '../../hooks/useAuth';
-
-const GET_TRIPS_PLACE = gql`
-    query GetTripPlaces($tripId: ID!) {
-        tripsPlaces(tripId: $tripId) {
-            id,
-            placeId,
-            tripId,
-            place {
-                id,
-                name,
-                mainImageUrl
-            }
-        }
-    }
-`;
+import { GET_TRIPS_PLACE } from '../../utility/querys/getTripPlace';
 
 export const TripDetail = ({ navigation }) => {
     const { token } = useAuth();

@@ -3,35 +3,11 @@ import { useSetNavigationOptions } from '../../hooks/useSetNavigationOptions';
 import { useAuth } from '../../hooks/useAuth';
 import { Layout } from './Layout';
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
 import { Loading } from "../Loading";
 import { useAlert } from "../../hooks/useAlert";
 import { useRoute } from "@react-navigation/native";
-
-const GET_TRIPS = gql`
-    query GetTripForUser($userId: ID!) {
-        trips(userId: $userId) {
-            id,
-            name,
-            userId
-        }
-    }
-`;
-
-const TRIP_PLACE_MUTATION = gql`
-    mutation registerTripPlace($input: RegisterTripPlace!)  {
-        registerTripPlace(input: $input)
-        {
-            ok,
-            error,
-             tripPlace {
-                id,
-                placeId,
-                tripId
-            }
-        }
-    }
-`;
+import { GET_TRIPS } from "../../utility/querys/getTrips";
+import { TRIP_PLACE_MUTATION } from "../../utility/mutations/addTripPlace";
 
 export const Trip = ({ navigation }) => {
     const route:any = useRoute();
@@ -45,7 +21,11 @@ export const Trip = ({ navigation }) => {
     });
 
     const [loadingData, setLoadingData] = React.useState(false);
-    const [addTripPlace] = useMutation(TRIP_PLACE_MUTATION);
+    const [addTripPlace] = useMutation(TRIP_PLACE_MUTATION, {
+        refetchQueries: [
+            {query: GET_TRIPS, variables: { userId } }
+        ]
+    });
 
     useSetNavigationOptions("Trip", true);
 

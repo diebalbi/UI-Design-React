@@ -1,18 +1,6 @@
 import { useMutation } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
-import { AsyncStorage } from 'react-native';
 import { useForm } from "../../../hooks/useForm";
-
-const REGISTER_MUTATION = gql`
-  mutation register($input: RegisterInput!) {
-    register(input: $input) {
-      id
-      fullname
-      email
-      token
-    }
-  }
-`;
+import { REGISTER_MUTATION } from "../../../utility/mutations/doRegister";
 
 export const useRegister = () => {
   const [register] = useMutation(REGISTER_MUTATION);
