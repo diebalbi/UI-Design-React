@@ -19,6 +19,11 @@ Por otro lado, decidimos no utilizar librerias que nos brindaran una Gallery la 
 
 - Modificar web/apollo.js e indicar la nueva URL
 
+## Instrucciones Mobile
+Para utilizar la app mobile deberemos primero que nada pararnos en la carpeta app y correr npm install. Tambien tendremos que cambiar la uri para que apunte a nuestro IP local para poder correr la API, para ello hay que ir a App/client.js y en httpLink cambiar la url por su ip local. Una vez realizado esto deberemos correr por un lado now dev parados en la raiz del proyecto y por otro lado npm start o expo start parados en la carpeta de App. En caso de que nos aparezca un mensaje solicitando instalar expo-cli deberemos ingresar y una vez realizado estos pasos se nos abrira una web de expo en la cual tendremos varias opciones, una de ellas es usar la web pero donde no todas las funcionalidades sirven, otra opción es usar un emulador de android o ios y por ultimo tenemos la opcion de usar nuestro celular, para eso deberemos instalar la app de Expo y activar el modo desarrollador en el celular. Y ya podremos probar la app corriendo y ver sus funcionalidad. 
+
+Para ingresar se puede utilizar el usuario: diegobalbi1993@gmail.com y contraseña: password
+
 ## Dependencias
 
 ### [Material UI](https://material-ui.com/)
