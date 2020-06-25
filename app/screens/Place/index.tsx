@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from './Layout';
 
-export const Place = ({ placeId, name, mainImageUrl, navigation }) => {
+export const Place = ({ favorite, placeId, name, mainImageUrl, navigation }) => {
 
-    return <Layout placeId={placeId} name={name} mainImageUrl={mainImageUrl} navigation={navigation} />
+    return <Layout favorite={favorite} placeId={placeId} name={name} mainImageUrl={mainImageUrl} navigation={navigation} />
 }

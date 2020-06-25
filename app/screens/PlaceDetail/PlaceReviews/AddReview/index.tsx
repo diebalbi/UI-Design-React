@@ -18,7 +18,6 @@ export const AddReview = ({ navigation }) => {
         setLoading(true);
 
         const data = await handleSubmit();
-        console.log("Data", data);
         if(data.registerReview) {
             navigation.goBack();
         }

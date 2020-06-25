@@ -15,7 +15,7 @@ export const Layout = ({navigation, continents}) => (
         }))}
         keyExtractor={(item) => item.id }
         renderItem={({ item }) => 
-          <Place name={item.name} mainImageUrl={item.mainImageUrl} placeId={item.id} navigation={navigation} />
+          <Place favorite={true} name={item.name} mainImageUrl={item.mainImageUrl} placeId={item.id} navigation={navigation} />
         }
         renderSectionHeader={({ section: { title } }) => (
           <Headline style={{marginVertical: 10}}>{title}</Headline>

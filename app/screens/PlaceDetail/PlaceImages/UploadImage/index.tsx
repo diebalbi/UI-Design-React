@@ -2,26 +2,22 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Layout } from "./Layout"
 import { useSetNavigationOptions } from "../../../../hooks/useSetNavigationOptions";
 import { Camera } from 'expo-camera';
-import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { useRoute } from '@react-navigation/native';
-
-const IMAGE_MUTATION = gql`
-    mutation Image($input: RegisterImage!)  {
-        registerImage(input: $input)
-        {
-            id,
-            url,
-            placeId
-        }
-    }
-`;
+import { IMAGE_MUTATION } from '../../../../utility/mutations/addImage';
+import { GET_PLACE } from '../../../../utility/querys/getPlace';
 
 export const UploadImage = ({ navigation }) => {
     useSetNavigationOptions("Upload Image", false);
     const route:any = useRoute();
     const placeId = route.params.placeId;
-    const [addImag] = useMutation(IMAGE_MUTATION);
+
+    const [addImag] = useMutation(IMAGE_MUTATION, {
+        refetchQueries: [
+            {query: GET_PLACE, variables: {placeId} }
+        ]
+    });
+
     const camRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [permission, setPermission] = useState('');

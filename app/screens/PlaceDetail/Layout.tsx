@@ -5,20 +5,21 @@ import { PlaceImages } from "./PlaceImages";
 import { PlaceActivities } from "./PlaceActivities";
 import { PlaceReviws } from "./PlaceReviews";
 import { Rating } from "react-native-ratings";
+import { Fontisto } from '@expo/vector-icons';
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const CardSubtitle = ({rating}) => (
-    <Rating 
-        type='custom'
-        ratingCount={5} 
-        readonly 
-        startingValue={rating} 
-        imageSize={20} 
-        ratingColor='#3498db' 
-    />
-)
-
-export const Layout = ({ navigation, place, rating }) => (
+export const Layout = ({ favorite, handlePress, navigation, place, rating }) => (
     <Container>
+        <ViewPlace style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Rating type='custom' ratingCount={5} readonly startingValue={rating} imageSize={20} ratingColor='#3498db' />
+            { favorite ? 
+                <TouchableOpacity onPress={() => handlePress(place.id)}>
+                    <Fontisto name="favorite" size={40} color="#3498db" />
+                </TouchableOpacity>
+                :
+                <></>
+            }
+        </ViewPlace>
         <ViewPlace>
             <PlaceImages navigation={navigation} images={place.images} placeId={place.id} />
         </ViewPlace>
