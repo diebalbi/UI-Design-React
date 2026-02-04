@@ -19,7 +19,7 @@
     "graphql": "^15.0.0",
     "jsonwebtoken": "^8.5.1",
     "micro-cors": "^0.1.1",
-    "mongoose": "^5.9.16",
+    "mongoose": "^6.13.6",
     "nodemon": "^2.0.4",
     "now": "^19.0.1",
     "react": "^16.13.1",
